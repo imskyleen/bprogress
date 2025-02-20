@@ -1,4 +1,4 @@
-export { useRouter } from './components/app-progress';
+export { useRouter } from './hooks/use-router';
 export { AppProgressProvider } from './providers/app-progress-provider';
 export { PagesProgressProvider } from './providers/pages-progress-provider';
 export {

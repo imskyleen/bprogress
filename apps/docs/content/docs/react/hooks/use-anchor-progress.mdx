@@ -1,0 +1,75 @@
+---
+title: useAnchorProgress
+description: Use `useAnchorProgress` hook
+---
+
+import { ProgressTypeTable } from '../../../../components/progress-type-table';
+
+There are two ways to set up a progress bar that is triggered during navigation:
+1. **If the framework has a router that detects the start and end of navigation** (like the Next.js Pages Directory router, for example), you can use the `useProgress` hook to trigger the progress bar at the start of navigation and stop it when you reach the target page.
+2. **If the framework has a router that doesn't detect the start and end of navigation** (like the Next.js App Directory router, for example), you can use this `useAnchorProgress` hook to activate navigation detection based on `<a>` elements in dom and `window.history`.
+
+## Import
+
+```tsx
+import { useAnchorProgress } from '@bprogress/react';
+```
+
+## Usage
+
+```tsx
+useAnchorProgress(
+  {
+    shallowRouting,
+    disableSameURL,
+    startPosition,
+    delay,
+    stopDelay,
+    targetPreprocessor,
+    disableAnchorClick,
+    startOnLoad,
+  },
+  [navigation],
+)
+```
+
+## Parameters
+
+```ts
+function useAnchorProgress(options: UseAnchorProgressOptions, deps: any[]): void;
+```
+
+### Options
+
+<ProgressTypeTable
+  displayTypes={["shallowRouting", "disableSameURL", "startPosition", "delay", "stopDelay", "targetPreprocessor", "disableAnchorClick", "startOnLoad", "forcedStopDelay"]}
+/>
+
+## Example
+
+```tsx title="progress.tsx"
+import {
+  useAnchorProgress,
+  withMemo,
+  type AnchorProgressProps,
+} from '@bprogress/react';
+import { useRouterNavigation } from '...';
+
+const ProgressComponent = (props: AnchorProgressProps) => {
+  const routerNavigation = useRouterNavigation();
+
+  useAnchorProgress(
+    {
+      ...props,
+      forcedStopDelay: 500,
+    },
+    [routerNavigation],
+  );
+
+  return null;
+};
+
+export const Progress = withMemo(ProgressComponent);
+
+Progress.displayName = 'Progress';
+```

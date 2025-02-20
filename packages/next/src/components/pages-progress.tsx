@@ -1,90 +1,57 @@
-import React, { useEffect } from 'react';
-import { BProgress } from '@bprogress/core';
-import { isSameURL, isSameURLWithoutSearch } from '../utils/sameURL';
+import { useEffect } from 'react';
+import {
+  isSameURL,
+  isSameURLWithoutSearch,
+  RouterProgressProps,
+  useProgress,
+  withMemo,
+} from '@bprogress/react';
 import Router from 'next/router';
-import type { PagesProgressProps } from '../types';
 
-export const PagesProgress = React.memo(
-  ({
-    shallowRouting = false,
-    disableSameURL = true,
-    startPosition = 0,
-    delay = 0,
-    stopDelay = 0,
-  }: PagesProgressProps) => {
-    useEffect(() => {
-      let timer: NodeJS.Timeout;
+const PagesProgressComponent = ({
+  shallowRouting = false,
+  disableSameURL = true,
+  startPosition = 0,
+  delay = 0,
+  stopDelay = 0,
+}: RouterProgressProps) => {
+  const { start, stop } = useProgress();
 
-      const startProgress = () => {
-        timer = setTimeout(() => {
-          if (startPosition > 0) BProgress.set(startPosition);
-          BProgress.start();
-        }, delay);
-      };
+  useEffect(() => {
+    const handleRouteStart = (url: string) => {
+      const targetUrl = new URL(url, location.href);
+      const currentUrl = new URL(location.href);
 
-      const stopProgress = () => {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(() => {
-          if (!BProgress.isStarted()) return;
-          BProgress.done(true);
-        }, stopDelay);
-      };
+      if (
+        shallowRouting &&
+        isSameURLWithoutSearch(targetUrl, currentUrl) &&
+        disableSameURL
+      )
+        return;
 
-      const handleRouteStart = (url: string) => {
-        const targetUrl = new URL(url, location.href);
-        const currentUrl = new URL(location.href);
+      // If the URL is the same, we don't want to start the progress bar
+      if (isSameURL(targetUrl, currentUrl) && disableSameURL) return;
 
-        if (
-          shallowRouting &&
-          isSameURLWithoutSearch(targetUrl, currentUrl) &&
-          disableSameURL
-        )
-          return;
+      start(startPosition, delay);
+    };
 
-        // If the URL is the same, we don't want to start the progress bar
-        if (isSameURL(targetUrl, currentUrl) && disableSameURL) return;
+    const handleRouteDone = () => stop(stopDelay);
 
-        startProgress();
-      };
-      const handleRouteDone = () => stopProgress();
+    Router.events.on('routeChangeStart', handleRouteStart);
+    Router.events.on('routeChangeComplete', handleRouteDone);
+    Router.events.on('routeChangeError', handleRouteDone);
 
-      Router.events.on('routeChangeStart', handleRouteStart);
-      Router.events.on('routeChangeComplete', handleRouteDone);
-      Router.events.on('routeChangeError', handleRouteDone);
+    return () => {
+      // Make sure to remove the event handler on unmount!
+      Router.events.off('routeChangeStart', handleRouteStart);
+      Router.events.off('routeChangeComplete', handleRouteDone);
+      Router.events.off('routeChangeError', handleRouteDone);
+    };
+  }, []);
 
-      return () => {
-        // Make sure to remove the event handler on unmount!
-        Router.events.off('routeChangeStart', handleRouteStart);
-        Router.events.off('routeChangeComplete', handleRouteDone);
-        Router.events.off('routeChangeError', handleRouteDone);
-      };
-    }, []);
+  return null;
+};
 
-    return null;
-  },
-  (prevProps, nextProps) => {
-    if (nextProps?.memo === false) {
-      return false;
-    }
-
-    if (!nextProps?.shouldCompareComplexProps) {
-      return true;
-    }
-
-    return (
-      prevProps?.color === nextProps?.color &&
-      prevProps?.height === nextProps?.height &&
-      prevProps?.shallowRouting === nextProps?.shallowRouting &&
-      prevProps?.startPosition === nextProps?.startPosition &&
-      prevProps?.delay === nextProps?.delay &&
-      prevProps?.disableSameURL === nextProps?.disableSameURL &&
-      prevProps?.stopDelay === nextProps?.stopDelay &&
-      prevProps?.nonce === nextProps?.nonce &&
-      JSON.stringify(prevProps?.options) ===
-        JSON.stringify(nextProps?.options) &&
-      prevProps?.style === nextProps?.style
-    );
-  },
-);
+export const PagesProgress = withMemo(PagesProgressComponent);
 
 PagesProgress.displayName = 'PagesProgress';

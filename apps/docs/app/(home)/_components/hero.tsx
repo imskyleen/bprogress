@@ -80,11 +80,11 @@ export const Hero = () => {
         <div className="lg:!mt-16 !mt-10 flex flex-col items-center justify-center space-y-4">
           <h2 className="text-2xl font-semibold">Try it now !</h2>
           <div className="flex flex-row gap-x-3">
-            <Button size="icon-lg" onClick={start}>
+            <Button size="icon-lg" onClick={() => start()}>
               <PlayCircle className="!size-7" />
             </Button>
 
-            <Button size="icon-lg" onClick={stop}>
+            <Button size="icon-lg" onClick={() => stop()}>
               <StopCircle className="!size-7" />
             </Button>
           </div>

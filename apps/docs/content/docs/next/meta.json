@@ -8,11 +8,11 @@
     "migration",
     "whats-new",
     "---Components---",
-    "progress-provider",
-    "../react/progress-components",
+    "components/progress-provider",
+    "../react/components/progress-components",
     "---Hooks---",
-    "../react/use-progress",
-    "use-router",
+    "../react/hooks/use-progress",
+    "hooks/use-router",
     "---Advanced---",
     "data-attributes"
   ]

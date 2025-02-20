@@ -26,13 +26,35 @@ export const ProgressProvider = ({
   disableStyle = false,
   nonce,
 }: ProgressProviderProps) => {
-  const start = useCallback(() => BProgress.start(), []);
-  const stop = useCallback(() => BProgress.done(), []);
+  const timer = React.useRef<NodeJS.Timeout | null>(null);
+
+  const start = useCallback((startPosition = 0, delay = 0) => {
+    timer.current = setTimeout(() => {
+      if (startPosition > 0) BProgress.set(startPosition);
+      BProgress.start();
+    }, delay);
+  }, []);
+
+  const stop = useCallback((stopDelay = 0, forcedStopDelay = 0) => {
+    setTimeout(() => {
+      if (timer.current) clearTimeout(timer.current);
+      timer.current = setTimeout(() => {
+        if (!BProgress.isStarted()) return;
+        BProgress.done();
+      }, stopDelay);
+    }, forcedStopDelay);
+  }, []);
+
   const inc = useCallback((amount?: number) => BProgress.inc(amount), []);
+
   const set = useCallback((n: number) => BProgress.set(n), []);
+
   const pause = useCallback(() => BProgress.pause(), []);
+
   const resume = useCallback(() => BProgress.resume(), []);
+
   const getOptions = useCallback(() => BProgress.settings, [BProgress]);
+
   const setOptions = useCallback(
     (
       newOptions:

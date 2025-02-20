@@ -13,6 +13,7 @@ The `@bprogress/react` package is a **utility** that lets you easily manage a pr
 ### React Frameworks Integrations
 
 - [Next.js](https://bprogress.vercel.app/docs/next/installation)
+- [Remix](https://bprogress.vercel.app/docs/remix/installation)
 - More soon...
 
 ## Usage

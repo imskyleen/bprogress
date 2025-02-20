@@ -29,6 +29,8 @@ Start the progress bar.
 
 ```tsx
 start();
+// or
+start(0.3, 1000);
 ```
 
 ### stop
@@ -37,6 +39,8 @@ Stop the progress bar.
 
 ```tsx
 stop();
+// or
+stop(1000);
 ```
 
 ### inc
@@ -93,8 +97,8 @@ const options = getOptions();
 
 ```ts
 interface ProgressContextValue {
-  start: () => void;
-  stop: () => void;
+  start: (startPosition?: number, delay?: number) => void;
+  stop: (stopDelay?: number, forcedStopDelay?: number) => void;
   inc: (amount?: number) => void;
   set: (n: number) => void;
   pause: () => void;

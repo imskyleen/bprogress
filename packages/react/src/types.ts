@@ -17,8 +17,8 @@ export type SpinnerPosition =
  * @param getOptions Get the BProgress options
  */
 export interface ProgressContextValue {
-  start: () => void;
-  stop: () => void;
+  start: (startPosition?: number, delay?: number) => void;
+  stop: (stopDelay?: number, forcedStopDelay?: number) => void;
   inc: (amount?: number) => void;
   set: (n: number) => void;
   pause: () => void;
@@ -65,3 +65,50 @@ export interface ProgressProviderProps {
   disableStyle?: boolean;
   nonce?: string;
 }
+
+/**
+ * @param shallowRouting If the progress bar is not displayed when you use shallow routing - @default false
+ * @param startPosition The position of the progress bar at the start of the page load - @default 0
+ * @param delay When the page loads faster than the progress bar, it does not display - @default 0
+ * @param stopDelay Delay to stop the progress bar - @default 0
+ * @param shouldCompareComplexProps If you want to compare props in the React.memo return - @default false
+ * @param disableSameURL Disable triggering progress bar on the same URL - @default true
+ */
+export interface RouterProgressProps {
+  shallowRouting?: boolean;
+  disableSameURL?: boolean;
+  startPosition?: number;
+  delay?: number;
+  stopDelay?: number;
+  memo?: boolean;
+  shouldCompareComplexProps?: boolean;
+}
+
+/**
+ * @param targetPreprocessor If you want to process the target URL - @default undefined
+ * @param disableAnchorClick Disable triggering progress bar on anchor clicks - @default false
+ * @param startOnLoad Start the progress bar on page load - @default false
+ */
+export interface AnchorProgressProps extends RouterProgressProps {
+  targetPreprocessor?: (url: URL) => URL;
+  disableAnchorClick?: boolean;
+  startOnLoad?: boolean;
+}
+
+export interface RouterProgressProviderProps
+  extends RouterProgressProps,
+    ProgressProviderProps {}
+
+export interface AnchorProgressProviderProps
+  extends AnchorProgressProps,
+    ProgressProviderProps {}
+
+/**
+ * @params forcedStopDelay - Delay to stop the progress bar that does not take the timer into account
+ */
+export type UseAnchorProgressOptions = Omit<
+  AnchorProgressProps,
+  'memo' | 'shouldCompareComplexProps'
+> & {
+  forcedStopDelay?: number;
+};

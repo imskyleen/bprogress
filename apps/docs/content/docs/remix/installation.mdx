@@ -1,0 +1,52 @@
+---
+title: Installation
+description: Install BProgress in your Remix application
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { SiNpm } from "react-icons/si";
+import { FaGithub } from "react-icons/fa6";
+
+## Installation
+
+To install BProgress, run the following command:
+
+<Tabs groupId="packageManager" items={['npm', 'pnpm', "yarn", "bun"]} persist>
+  <Tab value="npm">
+    ```bash
+    npm install @bprogress/remix
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @bprogress/remix
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @bprogress/remix
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @bprogress/remix
+    ```
+  </Tab>
+</Tabs>
+
+Now you are ready to use BProgress in your Remix application!
+
+<Callout type="warn" title="Warning">
+  This package requires Remix version 2.
+</Callout>
+
+## Links
+
+<Cards>
+  <Card external title="NPM" href="https://www.npmjs.com/package/@bprogress/remix" icon={<SiNpm />}>
+    Check the package on NPM
+  </Card>
+  <Card external title="GitHub" href="https://github.com/Skyleen77/bprogress/tree/main/packages/remix" icon={<FaGithub />}>
+    Check the repository on GitHub
+  </Card>
+</Cards>

@@ -1,0 +1,82 @@
+---
+title: useNavigate
+description: Use `useNavigate` hook
+---
+
+To trigger the progress bar when navigating with useNavigate, you need to use the `useNavigate` hook in `@bprogress/remix`, which wraps the remix hook by adding the progress bar.
+
+## Import
+
+```tsx
+import { useNavigate } from '@bprogress/remix';
+```
+
+## Usage
+
+See the [Remix `useNavigate` hook documentation for more information](https://remix.run/docs/en/main/hooks/use-navigate).
+
+```ts
+const navigate = useNavigate();
+```
+
+## Options
+
+```ts
+useNavigate(options?: NavigateProgressOptions): ProgressNavigateFunction
+```
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| showProgress | boolean | `true` | Show the progress bar. |
+| startPosition | number | undefined | The start position of the progress bar. |
+| disableSameURL | boolean | `true` | Disable the progress bar when the URL is the same. |
+| customNavigate | () => NavigateFunction | undefined | A custom navigate instance. |
+
+### NavigateProgressOptions
+
+```tsx
+interface NavigateProgressOptions {
+  showProgress?: boolean;
+  startPosition?: number;
+  disableSameURL?: boolean;
+  customNavigate?: () => NavigateFunction;
+}
+```
+
+<Callout title="Note">
+  By default, if you do not specify any options when using navigate, the options defined during the initialization of the `useNavigate` hook will be applied. However, if you provide specific options when using navigate, these will take precedence and override the default options set in the hook.
+</Callout>
+
+## Use navigate
+
+### Usage 
+
+#### delta
+
+```tsx
+navigate(1);
+navigate(-1, { startPosition: 0.3 });
+```
+
+#### to
+
+```tsx
+navigate('/about');
+navigate('/dashboard', { replace: true }, { startPosition: 0.3 });
+```
+
+### Types
+
+#### ProgressNavigateFunction
+
+```ts
+interface ProgressNavigateFunction {
+  (
+    to: To,
+    options?: NavigateOptions,
+    progressOptions?: NavigateActionsProgressOptions,
+  ): void;
+  (delta: number, progressOptions?: NavigateActionsProgressOptions): void;
+}
+```
+

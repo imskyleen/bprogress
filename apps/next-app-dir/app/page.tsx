@@ -26,10 +26,10 @@ export default function Home() {
         toggle showSpinner
       </button>
 
-      <button className="default" onClick={start}>
+      <button className="default" onClick={() => start()}>
         Start progress
       </button>
-      <button className="default" onClick={stop}>
+      <button className="default" onClick={() => stop()}>
         Stop progress
       </button>
       <button className="default" onClick={pause}>
@@ -42,6 +42,7 @@ export default function Home() {
       <Link href="/">Same route</Link>
       <Link href="/?test=param">Sallow</Link>
       <Link href="/dashboard">Dashboard</Link>
+      <Link href="/load">Load</Link>
       <Link
         href="/dashboard"
         style={{

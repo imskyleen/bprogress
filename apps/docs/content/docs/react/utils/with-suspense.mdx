@@ -1,0 +1,18 @@
+---
+title: With Suspense
+description: Used to surround your component with Suspense
+---
+
+## `withSuspense()`
+
+### Import
+
+```ts
+import { withSuspense } from '@bprogress/react';
+```
+
+### Type
+
+```ts
+function withSuspense<P extends object>(Component: ComponentType<P>): (props: P) => React.JSX.Element;
+```

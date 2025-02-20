@@ -1,0 +1,47 @@
+---
+title: ProgressProvider
+description: How to use ProgressProvider
+---
+
+import { ProgressTypeTable } from '../../../../components/progress-type-table';
+import { SiCsswizardry, SiNextdotjs } from "react-icons/si";
+
+Import the correct `ProgressProvider` according to your Next.js configuration.
+
+## Import
+
+```tsx
+// App Directory
+import { AppProgressProvider as ProgressProvider } from '@bprogress/next';
+// Pages Directory
+import { PagesProgressProvider as ProgressProvider } from '@bprogress/next';
+```
+
+## Usage
+
+```tsx
+<ProgressProvider>
+  ...
+</ProgressProvider>
+```
+
+## Props 
+
+### Common props
+
+<ProgressTypeTable
+  displayTypes={["children", "height", "color", "options", "spinnerPosition", "shallowRouting", "startPosition", "delay", "disableSameURL", "stopDelay", "nonce", "memo", "style", "disableStyle", "shouldCompareComplexProps"]}
+/>
+
+### AppProgressBar props
+
+<ProgressTypeTable
+  displayTypes={["targetPreprocessor", "disableAnchorClick", "startOnLoad"]}
+/>
+
+### Links
+
+<Cards>
+  <Card external icon={<SiCsswizardry />} title="BProgress CSS" href="https://github.com/Skyleen77/bprogress/blob/main/packages/core/index.css" description="Default BProgress CSS" />
+  <Card external icon={<SiNextdotjs />} title="Next.js docs" href="https://nextjs.org/docs/pages/building-your-application/routing/linking-and-navigating#shallow-routing" description="Shallow routing on Next.js" />
+</Cards>

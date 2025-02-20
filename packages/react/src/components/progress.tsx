@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ProgressComponentProps } from '../types';
-import { classNames } from '../utils/classNames';
+import { classNames } from '../utils/classnames';
 import { Bar } from './bar';
 import { Peg } from './peg';
 import { Spinner } from './spinner';

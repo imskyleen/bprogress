@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/next",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "Progress bar for Next.js compatible with new app directory",
   "repository": {
     "type": "git",
@@ -59,6 +59,6 @@
   },
   "dependencies": {
     "@bprogress/core": "^1.1.15",
-    "@bprogress/react": "^1.0.1"
+    "@bprogress/react": "^1.1.0"
   }
 }

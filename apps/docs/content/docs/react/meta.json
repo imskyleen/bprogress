@@ -6,9 +6,14 @@
     "installation",
     "quick-start",
     "---Components---",
-    "progress-provider",
-    "progress-components",
+    "components/progress-provider",
+    "components/progress-components",
     "---Hooks---",
-    "use-progress"
+    "hooks/use-progress",
+    "hooks/use-anchor-progress",
+    "---Utils---",
+    "utils/same-url",
+    "utils/with-memo",
+    "utils/with-suspense"
   ]
 }

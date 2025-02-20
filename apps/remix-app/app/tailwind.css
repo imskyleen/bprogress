@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-white dark:bg-gray-950;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
+
+main {
+ display: flex;
+ flex-direction: column;
+}
+
+button, a {
+  all: unset;
+  color: white;
+  padding: 7px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: fit-content;
+  margin-top: 5px;
+  position: relative;
+}
+
+button:not(.default) {
+  background-color: red;
+}
+
+button.default {
+  background-color: green;
+}
+
+button:not(.default)::after {
+  content: "router.push()";
+}
+
+button.replace::after {
+  content: "router.replace()" !important;
+}
+
+button.back::after {
+  content: "router.back()" !important;
+}
+
+a::after {
+  content: "<Link>";
+}
+
+a.a::after {
+  content: "<a>";
+}
+
+a::after, button::after {
+  position: absolute;
+  color: black;
+  margin-left: 20px;
+  font-size: 12px;
+  bottom: 0;
+}
+
+a {
+  background-color: blue;
+}
+
+:root {
+  --primary: 220 70% 50%;
+}

@@ -1,0 +1,19 @@
+---
+title: Prevent progress
+description: Prevent the progress bar from starting
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+You can prevent the progress bar from starting by adding the `data-prevent-progress={true}` attribute.
+
+## Usage
+
+```tsx
+<Link to="/dashboard">
+  <span>Dashboard</span>
+  <span onClick={(e) => e.preventDefault()} data-prevent-progress={true}>
+    preventDefault
+  </span>
+</Link>
+```

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ProgressComponentProps } from '../types';
-import { classNames } from '../utils/classNames';
+import { classNames } from '../utils/classnames';
 
 export type SpinnerIconProps<T extends React.ElementType = 'div'> = Omit<
   ProgressComponentProps<T>,

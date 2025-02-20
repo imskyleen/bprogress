@@ -1,0 +1,21 @@
+---
+title: With Memo
+description: Used to wrap your Progress component with a memo to optimize performance
+---
+
+## `withMemo()`
+
+### Import
+
+```ts
+import { withMemo } from '@bprogress/react';
+```
+
+### Type
+
+```ts
+function withMemo<P extends {
+    memo?: boolean;
+    shouldCompareComplexProps?: boolean;
+}>(Component: React.ComponentType<P>, ignoreKeys?: string[]): React.MemoExoticComponent<React.ComponentType<P>>;
+```

@@ -1,0 +1,20 @@
+---
+title: Disable progress
+description: Disable the progress bar on specific links
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+You can disable the progress bar on specific links by adding the `data-disable-progress={true}` attribute.
+
+<Callout type="warn" title="Warning">
+  This will not work for Link in svg elements.
+</Callout>
+
+## Usage
+
+```tsx
+<Link to="/features" data-disable-progress={true}>
+  Features
+</Link>
+```

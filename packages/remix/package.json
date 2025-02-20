@@ -1,0 +1,62 @@
+{
+  "name": "@bprogress/remix",
+  "version": "1.0.1",
+  "description": "Progress bar for Remix",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Skyleen77/bprogress/tree/main/packages/remix"
+  },
+  "bugs": {
+    "url": "https://github.com/Skyleen77/bprogress/issues"
+  },
+  "homepage": "https://bprogress.vercel.app/docs/remix/installation",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "pub:release": "pnpm publish --no-git-checks --access public"
+  },
+  "keywords": [
+    "remix",
+    "remix nprogress",
+    "remix bprogress",
+    "remix progress",
+    "react",
+    "nprogress",
+    "bprogress",
+    "progress bar",
+    "progress bar remix"
+  ],
+  "author": "Skyleen",
+  "license": "MIT",
+  "devDependencies": {
+    "@swc/core": "^1.10.16",
+    "@types/node": "^22.12.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
+    "eslint": "^9.19.0",
+    "eslint-config-next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "@remix-run/react": "^2.15.3"
+  },
+  "peerDependencies": {
+    "@remix-run/react": ">=2.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "@bprogress/core": "^1.1.15",
+    "@bprogress/react": "^1.1.0"
+  }
+}

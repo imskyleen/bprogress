@@ -1,9 +1,16 @@
 import React from 'react';
-import { ProgressProvider } from '@bprogress/react';
-import type { NextProgressProps } from '../types';
+import {
+  AnchorProgressProps,
+  ProgressProvider,
+  ProgressProviderProps,
+  RouterProgressProps,
+} from '@bprogress/react';
 
-export interface NextProgressProviderComponentProps extends NextProgressProps {
-  ProgressComponent: React.ComponentType<NextProgressProps>;
+export interface NextProgressProviderComponentProps
+  extends ProgressProviderProps {
+  ProgressComponent: React.ComponentType<
+    RouterProgressProps | AnchorProgressProps
+  >;
 }
 
 export const NextProgressProvider = ({
