@@ -14,12 +14,15 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
+    "test": "turbo test",
     "docs:dev": "pnpm pnpm --filter docs dev",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
+    "husky": "^9.1.7",
     "prettier": "^3.2.5",
     "turbo": "^2.3.0",
     "typescript": "5.5.4"
