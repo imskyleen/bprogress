@@ -14,9 +14,9 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2022",
-    "types": ["node"],
+    "types": ["node", "jest"],
     "outDir": "dist",
   },
-  "include": ["src"],
+  "include": ["src", "__tests__"],
   "exclude": ["node_modules", "dist"]
 }
