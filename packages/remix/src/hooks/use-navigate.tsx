@@ -19,6 +19,7 @@ export function useNavigate(
   // Use a custom navigate function if provided, otherwise use Remix's built-in useNavigate.
   const useSelectedNavigate = useCallback(() => {
     if (customNavigate) return customNavigate();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useRemixNavigate();
   }, [customNavigate]);
 
@@ -62,6 +63,7 @@ export function useNavigate(
             targetUrl = new URL(pathname + search + hash, window.location.href);
           }
         } catch (error) {
+          console.error(error);
           // If URL creation fails, fall back to normal navigation.
           return navigate(to, navOptions);
         }

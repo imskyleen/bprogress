@@ -31,6 +31,7 @@ export interface NavigateProgressOptions
 // because it's not exported in the package's public API.
 type NavigateOptions = {
   replace?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   state?: any;
   preventScrollReset?: boolean;
   relative?: 'route' | 'path';

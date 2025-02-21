@@ -17,7 +17,8 @@
     "test": "turbo test",
     "docs:dev": "pnpm pnpm --filter docs dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",

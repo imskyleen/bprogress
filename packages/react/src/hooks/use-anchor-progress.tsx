@@ -5,6 +5,7 @@ import { useProgress } from '../providers/progress-provider';
 import type { UseAnchorProgressOptions } from '../types';
 
 type PushStateInput = [
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any,
   unused: string,
   url?: string | URL | null | undefined,
@@ -33,6 +34,8 @@ export function useAnchorProgress(
 
   useEffect(() => {
     if (startOnLoad) start(startPosition, delay);
+    // We want to start the progress bar on load only once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -42,6 +45,7 @@ export function useAnchorProgress(
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   useEffect(() => {
@@ -159,5 +163,8 @@ export function useAnchorProgress(
     delay,
     stopDelay,
     startPosition,
+    start,
+    stop,
+    forcedStopDelay,
   ]);
 }

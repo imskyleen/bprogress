@@ -47,6 +47,7 @@ const PagesProgressComponent = ({
       Router.events.off('routeChangeComplete', handleRouteDone);
       Router.events.off('routeChangeError', handleRouteDone);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

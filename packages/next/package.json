@@ -1,6 +1,7 @@
 {
   "name": "@bprogress/next",
   "version": "3.0.5",
+  "type": "module",
   "description": "Progress bar for Next.js compatible with new app directory",
   "repository": {
     "type": "git",

@@ -79,6 +79,7 @@ export class BProgress {
         // When the bar reaches maximum, make it semi-transparent to indicate completion
         progressElements.forEach((progress) => {
           css(progress, { transition: 'none', opacity: '1' });
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
           progress.offsetWidth; // Repaint
         });
         setTimeout(() => {
@@ -168,6 +169,7 @@ export class BProgress {
   }
 
   // Handle jQuery promises (for compatibility)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static promise($promise: any): typeof BProgress {
     if (!$promise || $promise.state() === 'resolved') {
       return this;
@@ -206,7 +208,7 @@ export class BProgress {
       typeof this.settings.parent === 'string'
         ? document.querySelector(this.settings.parent)
         : this.settings.parent;
-    let progressElements: HTMLElement[] = parent
+    const progressElements: HTMLElement[] = parent
       ? Array.from((parent as HTMLElement).querySelectorAll('.bprogress'))
       : [];
 
@@ -267,7 +269,7 @@ export class BProgress {
           const spinner = progress.querySelector(
             this.settings.spinnerSelector,
           ) as HTMLElement;
-          spinner && removeElement(spinner);
+          if (spinner) removeElement(spinner);
         }
       }
     });

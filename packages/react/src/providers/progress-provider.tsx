@@ -53,7 +53,7 @@ export const ProgressProvider = ({
 
   const resume = useCallback(() => BProgress.resume(), []);
 
-  const getOptions = useCallback(() => BProgress.settings, [BProgress]);
+  const getOptions = useCallback(() => BProgress.settings, []);
 
   const setOptions = useCallback(
     (
@@ -83,7 +83,7 @@ export const ProgressProvider = ({
           })}
       </style>
     ),
-    [color, height, nonce, spinnerPosition],
+    [color, height, nonce, spinnerPosition, style],
   );
 
   BProgress.configure(options || {});

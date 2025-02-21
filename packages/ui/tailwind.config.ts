@@ -2,7 +2,7 @@ import { createPreset } from 'fumadocs-ui/tailwind-plugin';
 import svgToTinyDataUri from 'mini-svg-data-uri';
 import type { Config } from 'tailwindcss';
 import tailwindcssAnimate from 'tailwindcss-animate';
-// @ts-ignore
+// @ts-expect-error This is a valid import
 import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette';
 
 const config = {
@@ -63,9 +63,11 @@ const config = {
   plugins: [
     tailwindcssAnimate,
     addVariablesForColors,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function ({ matchUtilities, theme }: any) {
       matchUtilities(
         {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           'bg-dot-thick': (value: any) => ({
             backgroundImage: `url("${svgToTinyDataUri(
               `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="2.5"></circle></svg>`,
@@ -81,9 +83,10 @@ const config = {
   ],
 } satisfies Config;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function addVariablesForColors({ addBase, theme }: any) {
-  let allColors = flattenColorPalette(theme('colors'));
-  let newVars = Object.fromEntries(
+  const allColors = flattenColorPalette(theme('colors'));
+  const newVars = Object.fromEntries(
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
   );
 

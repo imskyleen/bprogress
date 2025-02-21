@@ -32,6 +32,7 @@ export function getAnchorProperty<
 >(a: T, key: K): P extends SVGAnimatedString ? string : P {
   if (typeof key === 'string' && key === 'data-disable-bprogress') {
     const dataKey = key.substring(5) as keyof DOMStringMap;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return a.dataset[dataKey] as any;
   }
 
@@ -41,11 +42,14 @@ export function getAnchorProperty<
     const value = prop.baseVal as unknown;
 
     if (key === 'href') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return addPathPrefix(value as string, location.origin) as any;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return value as any;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return prop as any;
 }

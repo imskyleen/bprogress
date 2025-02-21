@@ -2,6 +2,7 @@
   "name": "@bprogress/remix",
   "version": "1.0.1",
   "description": "Progress bar for Remix",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/Skyleen77/bprogress/tree/main/packages/remix"

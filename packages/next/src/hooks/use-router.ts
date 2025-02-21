@@ -20,6 +20,7 @@ export function useRouter(options?: RouterProgressOptions) {
   // Select the router: use the custom router if provided, otherwise use Next.js router.
   const useSelectedRouter = useCallback(() => {
     if (customRouter) return customRouter();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useNextRouter();
   }, [customRouter]);
 

@@ -16,6 +16,7 @@ export function css(
 ): void {
   if (typeof properties === 'string') {
     if (value !== undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       element.style[properties as any] = value;
     }
   } else {
@@ -23,6 +24,7 @@ export function css(
       if (properties.hasOwnProperty(prop)) {
         const val = properties[prop];
         if (val !== undefined) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           element.style[prop as any] = val;
         }
       }
