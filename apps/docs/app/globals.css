@@ -10,6 +10,10 @@
   @apply !bg-transparent;
 }
 
+.npm-button path {
+  @apply !fill-white;
+}
+
 .bprogress-logo {
   display: inline-block;
   width: 70%;
