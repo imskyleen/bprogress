@@ -1,4 +1,4 @@
-function parsePath(path: string) {
+export function parsePath(path: string) {
   const hashIndex = path.indexOf('#');
   const queryIndex = path.indexOf('?');
   const hasQuery = queryIndex > -1 && (hashIndex < 0 || queryIndex < hashIndex);
@@ -16,7 +16,7 @@ function parsePath(path: string) {
   return { pathname: path, query: '', hash: '' };
 }
 
-function addPathPrefix(path: string, prefix?: string) {
+export function addPathPrefix(path: string, prefix?: string) {
   if (!path.startsWith('/') || !prefix) {
     return path;
   }
@@ -30,8 +30,11 @@ export function getAnchorProperty<
   K extends keyof T,
   P extends T[K],
 >(a: T, key: K): P extends SVGAnimatedString ? string : P {
-  if (typeof key === 'string' && key === 'data-disable-bprogress') {
-    const dataKey = key.substring(5) as keyof DOMStringMap;
+  if (typeof key === 'string' && key === 'data-disable-progress') {
+    const dataKey = key
+      .substring(5)
+      .replace(/-([a-z])/g, (_, c) => c.toUpperCase()) as keyof DOMStringMap;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return a.dataset[dataKey] as any;
   }

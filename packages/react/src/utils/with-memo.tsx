@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-function shallowCompareProps<T extends object>(
+export function shallowCompareProps<T extends object>(
   prevProps: T,
   nextProps: T,
   ignoreKeys: string[] = [],

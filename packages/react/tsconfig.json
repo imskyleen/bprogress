@@ -15,9 +15,11 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
+    "esModuleInterop": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "types": ["jest", "@testing-library/jest-dom", "node"]
   },
-  "include": ["src"],
+  "include": ["src", "__tests__"],
   "exclude": ["node_modules", "dist", "example", "tsup.config.js"]
 }
