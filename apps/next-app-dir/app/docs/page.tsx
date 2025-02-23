@@ -10,10 +10,10 @@ export default function Home() {
   return (
     <>
       <h1>BProgress</h1>
-      <button className="default" onClick={start}>
+      <button className="default" onClick={() => start()}>
         Start progress
       </button>
-      <button className="default" onClick={stop}>
+      <button className="default" onClick={() => stop()}>
         Stop progress
       </button>
 
