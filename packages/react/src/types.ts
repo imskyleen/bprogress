@@ -1,10 +1,4 @@
-import type { BProgressOptions } from '@bprogress/core';
-
-export type SpinnerPosition =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right';
+import type { BProgressOptions, SpinnerPosition } from '@bprogress/core';
 
 /**
  * @param start Start the progress bar

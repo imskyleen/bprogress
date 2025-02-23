@@ -29,6 +29,7 @@ jest.mock('@bprogress/core', () => ({
       direction: 'ltr',
     } as Required<BProgressOptions>,
   },
+  css: jest.fn(() => 'mocked-css { color: red; }'),
 }));
 
 describe('ProgressProvider', () => {

@@ -1,8 +1,6 @@
-import { BProgress, type BProgressOptions } from '@bprogress/core';
+import { BProgress, css, type BProgressOptions } from '@bprogress/core';
 import React, { createContext, useCallback, useContext, useMemo } from 'react';
-import { css } from '../utils/css';
-import type { ProgressContextValue } from '..';
-import type { ProgressProviderProps } from '../types';
+import type { ProgressProviderProps, ProgressContextValue } from '../types';
 
 const ProgressContext = createContext<ProgressContextValue | undefined>(
   undefined,

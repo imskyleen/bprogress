@@ -2,7 +2,7 @@ import { BProgressOptions } from './types';
 import {
   clamp,
   toBarPerc,
-  css,
+  toCss,
   addClass,
   removeClass,
   removeElement,
@@ -72,19 +72,19 @@ export class BProgress {
         const bar = progress.querySelector(
           this.settings.barSelector,
         ) as HTMLElement;
-        css(bar, this.barPositionCSS({ n, speed, ease }));
+        toCss(bar, this.barPositionCSS({ n, speed, ease }));
       });
 
       if (n === this.settings.maximum) {
         // When the bar reaches maximum, make it semi-transparent to indicate completion
         progressElements.forEach((progress) => {
-          css(progress, { transition: 'none', opacity: '1' });
+          toCss(progress, { transition: 'none', opacity: '1' });
           // eslint-disable-next-line @typescript-eslint/no-unused-expressions
           progress.offsetWidth; // Repaint
         });
         setTimeout(() => {
           progressElements.forEach((progress) => {
-            css(progress, {
+            toCss(progress, {
               transition: `all ${speed}ms ${ease}`,
               opacity: '0',
             });
@@ -94,7 +94,7 @@ export class BProgress {
             progressElements.forEach((progress) => {
               this.remove(progress);
               if (this.settings.template === null) {
-                css(progress, { transition: 'none', opacity: '1' });
+                toCss(progress, { transition: 'none', opacity: '1' });
               }
             });
 
@@ -245,7 +245,7 @@ export class BProgress {
       const perc = fromStart
         ? toBarPerc(0, this.settings.direction)
         : toBarPerc(this.status || 0, this.settings.direction);
-      css(
+      toCss(
         bar,
         this.barPositionCSS({
           n: this.status || 0,

@@ -3,4 +3,4 @@ export * from './hooks/use-anchor-progress';
 export * from './components';
 export * from './utils';
 export type * from './types';
-export type { BProgressOptions } from '@bprogress/core';
+export type { BProgressOptions, SpinnerPosition } from '@bprogress/core';

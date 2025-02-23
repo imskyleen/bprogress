@@ -1,5 +1,5 @@
-import { css } from '../../src/utils/css';
-import type { SpinnerPosition } from '../../src';
+import { css } from '../src/lib/css';
+import type { SpinnerPosition } from '../src/types';
 
 describe('css utility function', () => {
   it('returns the default CSS when no parameters are provided', () => {

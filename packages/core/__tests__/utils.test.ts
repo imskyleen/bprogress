@@ -1,7 +1,7 @@
 import {
   clamp,
   toBarPerc,
-  css,
+  toCss,
   addClass,
   removeClass,
   removeElement,
@@ -39,20 +39,20 @@ describe('Utils functions', () => {
   describe('css', () => {
     test('should apply multiple styles correctly', () => {
       const div = document.createElement('div');
-      css(div, { color: 'red', backgroundColor: 'blue' });
+      toCss(div, { color: 'red', backgroundColor: 'blue' });
       expect(div.style.color).toBe('red');
       expect(div.style.backgroundColor).toBe('blue');
     });
 
     test('should apply a single style property correctly', () => {
       const div = document.createElement('div');
-      css(div, 'color', 'green');
+      toCss(div, 'color', 'green');
       expect(div.style.color).toBe('green');
     });
 
     test('should not apply undefined values', () => {
       const div = document.createElement('div');
-      css(div, { color: undefined });
+      toCss(div, { color: undefined });
       expect(div.style.color).toBe('');
     });
   });

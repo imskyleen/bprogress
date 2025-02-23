@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/remix",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Progress bar for Remix",
   "type": "module",
   "repository": {
@@ -12,7 +12,7 @@
   },
   "homepage": "https://bprogress.vercel.app/docs/remix/installation",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -57,7 +57,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@bprogress/core": "^1.1.15",
-    "@bprogress/react": "^1.1.1"
+    "@bprogress/core": "^1.1.16",
+    "@bprogress/react": "^1.1.2"
   }
 }

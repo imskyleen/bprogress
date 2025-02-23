@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/next",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "type": "module",
   "description": "Progress bar for Next.js compatible with new app directory",
   "repository": {
@@ -12,7 +12,7 @@
   },
   "homepage": "https://bprogress.vercel.app/docs/next/installation",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -59,7 +59,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@bprogress/core": "^1.1.15",
-    "@bprogress/react": "^1.1.1"
+    "@bprogress/core": "^1.1.16",
+    "@bprogress/react": "^1.1.2"
   }
 }

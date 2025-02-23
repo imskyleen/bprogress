@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/react",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "type": "module",
   "description": "Utility to create your own progress bar with React",
   "repository": {
@@ -12,7 +12,7 @@
   },
   "homepage": "https://bprogress.vercel.app/docs/react/installation",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -59,6 +59,6 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@bprogress/core": "^1.1.15"
+    "@bprogress/core": "^1.1.16"
   }
 }

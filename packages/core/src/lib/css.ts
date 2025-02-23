@@ -1,4 +1,4 @@
-import type { SpinnerPosition } from '..';
+import type { SpinnerPosition } from '../types';
 
 export const css = ({
   color,

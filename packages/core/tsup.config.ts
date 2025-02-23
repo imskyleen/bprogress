@@ -3,7 +3,7 @@ import { copyFileSync } from 'fs';
 
 export default defineConfig({
   entry: ['src/index.ts'],
-  format: ['esm', 'cjs'],
+  format: ['esm'],
   globalName: 'BProgress',
   dts: true,
   outDir: 'dist',

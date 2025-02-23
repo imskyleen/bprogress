@@ -21,3 +21,9 @@ export interface BProgressOptions {
   spinnerSelector?: string;
   direction?: BProgressDirection;
 }
+
+export type SpinnerPosition =
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right';
