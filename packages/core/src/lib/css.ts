@@ -1,14 +1,12 @@
 import type { SpinnerPosition } from '../types';
 
-export const css = ({
-  color,
-  height,
-  spinnerPosition,
-}: {
+export type CssOptions = {
   color?: string;
   height?: string;
   spinnerPosition?: SpinnerPosition;
-}) => `
+};
+
+export const css = ({ color, height, spinnerPosition }: CssOptions) => `
 .bprogress {
   pointer-events: none;
   z-index: 99999;

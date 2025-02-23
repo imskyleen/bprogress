@@ -1,0 +1,36 @@
+---
+title: css
+description: Returns css classes in string
+---
+
+## `css()`
+
+### Import
+
+```ts
+import { css } from '@bprogress/react';
+```
+
+### Type
+
+```ts
+function css(options: CssOptions): string;
+```
+
+#### `CssOptions`
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `color` | `string` | Color of the text |
+| `height` | `string` | Height of the element |
+| `spinnerPosition` | `SpinnerPosition` | Position of the spinner |
+
+#### `SpinnerPosition`
+
+| Name | Description |
+| ---- | ----------- |
+| `top-left` | Spinner at the top left |
+| `top-right` | Spinner at the top right |
+| `bottom-left` | Spinner at the bottom left |
+| `bottom-right` | Spinner at the bottom right |
+
