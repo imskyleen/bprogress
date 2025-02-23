@@ -6,11 +6,5 @@ export default defineConfig({
   clean: true,
   dts: true,
   format: ['esm', 'cjs'],
-  external: [
-    'react',
-    'react-dom',
-    'next/router',
-    'next/navigation',
-    '@bprogress/core',
-  ],
+  external: ['react', 'react-dom', '@remix-run/react', '@bprogress/core'],
 });
