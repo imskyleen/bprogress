@@ -403,11 +403,11 @@ importers:
   packages/next:
     dependencies:
       '@bprogress/core':
-        specifier: ^1.1.16
-        version: 1.1.16
+        specifier: ^1.1.17
+        version: 1.1.17
       '@bprogress/react':
-        specifier: ^1.1.2
-        version: 1.1.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.1.3
+        version: 1.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@swc/core':
         specifier: ^1.10.16
@@ -452,8 +452,8 @@ importers:
   packages/react:
     dependencies:
       '@bprogress/core':
-        specifier: ^1.1.16
-        version: 1.1.16
+        specifier: ^1.1.17
+        version: 1.1.17
     devDependencies:
       '@swc/core':
         specifier: ^1.10.16
@@ -1366,8 +1366,17 @@ packages:
   '@bprogress/core@1.1.16':
     resolution: {integrity: sha512-sQd4BIcS94WUxTmWqy6DLCAQJH+bdLZKogloOXKIBDC7CGj9WAMsgG6TTuH1WV5U89OoZeIXhY+XL4PPS/80fQ==}
 
+  '@bprogress/core@1.1.17':
+    resolution: {integrity: sha512-kbyq/w9hhxDEDCCd12vl2BCKv8Yj40H/olmrX1NBGM380jD8wdiHRWT93xf7N4X7X3kTqQPypY/Jk86StFqziw==}
+
   '@bprogress/react@1.1.2':
     resolution: {integrity: sha512-j07IBNJOxh8Bv5M0BC5bjN8eyGu3XKF/agNad74VxbCSEI9XWFe+qHHlpR2bmJvkBYygKAY7K6H8sCMvcdRRDA==}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+
+  '@bprogress/react@1.1.3':
+    resolution: {integrity: sha512-i9MJH4uQGFkN2Y9TCII9FmI7xd6PAE3OhjsnWaOO6wttuCclLEysRZ+PBaHX8y23tO/Y4JSEKe1qbyn08LUsVQ==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -11469,9 +11478,17 @@ snapshots:
 
   '@bprogress/core@1.1.16': {}
 
+  '@bprogress/core@1.1.17': {}
+
   '@bprogress/react@1.1.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@bprogress/core': 1.1.16
+      '@bprogress/core': 1.1.17
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+
+  '@bprogress/react@1.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      '@bprogress/core': 1.1.17
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 

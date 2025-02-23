@@ -16,7 +16,7 @@ jest.mock('../../src/providers/progress-provider', () => ({
 }));
 
 // Mock URL comparison utilities to always return false (so that start is triggered)
-jest.mock('../../src/utils/same-url', () => ({
+jest.mock('@bprogress/core', () => ({
   isSameURL: jest.fn(() => false),
   isSameURLWithoutSearch: jest.fn(() => false),
 }));

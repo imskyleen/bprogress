@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/remix",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Progress bar for Remix",
   "type": "module",
   "repository": {
@@ -57,7 +57,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@bprogress/core": "^1.1.16",
-    "@bprogress/react": "^1.1.2"
+    "@bprogress/core": "^1.1.17",
+    "@bprogress/react": "^1.1.3"
   }
 }
