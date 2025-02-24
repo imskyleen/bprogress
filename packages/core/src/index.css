@@ -1,30 +1,42 @@
+/* Global variables */
+:root {
+  --bprogress-color: #29d;
+  --bprogress-height: 2px;
+  --bprogress-spinner-size: 18px;
+  --bprogress-spinner-animation-duration: 400ms;
+  --bprogress-spinner-border-size: 2px;
+  --bprogress-box-shadow: 0 0 10px var(--bprogress-color), 0 0 5px var(--bprogress-color);
+  --bprogress-z-index: 99999;
+  --bprogress-spinner-top: 15px;
+  --bprogress-spinner-bottom: auto;
+  --bprogress-spinner-right: 15px;
+  --bprogress-spinner-left: auto;
+}
+
 .bprogress {
   pointer-events: none;
-  z-index: 99999;
+  z-index: var(--bprogress-z-index);
 }
 
 .bprogress .bar {
-  background: #29d;
-
+  background: var(--bprogress-color);
   position: fixed;
-  z-index: 99999;
+  z-index: var(--bprogress-z-index);
   top: 0;
   left: 0;
-
   width: 100%;
-  height: 2px;
+  height: var(--bprogress-height);
 }
 
 /* Fancy blur effect */
 .bprogress .peg {
   display: block;
   position: absolute;
-  right: 0px;
+  right: 0;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  box-shadow: var(--bprogress-box-shadow);
   opacity: 1.0;
-
   transform: rotate(3deg) translate(0px, -4px);
 }
 
@@ -32,22 +44,23 @@
 .bprogress .spinner {
   display: block;
   position: fixed;
-  z-index: 1031;
-  top: 15px;
-  right: 15px;
+  z-index: var(--bprogress-z-index);
+  top: var(--bprogress-spinner-top);
+  bottom: var(--bprogress-spinner-bottom);
+  right: var(--bprogress-spinner-right);
+  left: var(--bprogress-spinner-left);
 }
 
 .bprogress .spinner-icon {
-  width: 18px;
-  height: 18px;
+  width: var(--bprogress-spinner-size);
+  height: var(--bprogress-spinner-size);
   box-sizing: border-box;
-
-  border: solid 2px transparent;
-  border-top-color: #29d;
-  border-left-color: #29d;
+  border: solid var(--bprogress-spinner-border-size) transparent;
+  border-top-color: var(--bprogress-color);
+  border-left-color: var(--bprogress-color);
   border-radius: 50%;
-
-  animation: bprogress-spinner 400ms linear infinite;
+  -webkit-animation: bprogress-spinner var(--bprogress-spinner-animation-duration) linear infinite;
+  animation: bprogress-spinner var(--bprogress-spinner-animation-duration) linear infinite;
 }
 
 .bprogress-custom-parent {
@@ -58,6 +71,11 @@
 .bprogress-custom-parent .bprogress .spinner,
 .bprogress-custom-parent .bprogress .bar {
   position: absolute;
+}
+
+@-webkit-keyframes bprogress-spinner {
+  0%   { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
 }
 
 @keyframes bprogress-spinner {
