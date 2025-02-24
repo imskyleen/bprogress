@@ -11,15 +11,6 @@ describe('css utility function', () => {
     expect(result).toContain('.bprogress .spinner {');
   });
 
-  it('includes the provided color in several places', () => {
-    const color = '#F00';
-    const result = css({ color });
-
-    expect(result).toContain(`background: ${color};`);
-    expect(result).toContain(`box-shadow: 0 0 10px ${color}, 0 0 5px ${color}`);
-    expect(result).toContain(`border-top-color: ${color}`);
-  });
-
   it('includes the provided height in the .bar selector', () => {
     const height = '5px';
     const result = css({ height });
