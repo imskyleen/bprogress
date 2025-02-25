@@ -23,6 +23,8 @@
     "resume",
     "is-rendered",
     "get-positioning-css",
+    "---Style---",
+    "style",
     "---Utils---",
     "css",
     "same-url",
