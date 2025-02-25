@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/remix",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Progress bar for Remix",
   "type": "module",
   "repository": {

@@ -1,6 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { BProgress } from '@bprogress/core';
-import { isSameURL } from '@bprogress/react';
+import { BProgress, isSameURL } from '@bprogress/core';
 import { useRouter as useNextRouter } from 'next/navigation';
 import type { NavigateOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import type {

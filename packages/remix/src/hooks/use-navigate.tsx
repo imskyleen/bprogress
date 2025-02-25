@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { useNavigate as useRemixNavigate } from '@remix-run/react';
-import { BProgress } from '@bprogress/core';
-import { isSameURL } from '@bprogress/react';
+import { BProgress, isSameURL } from '@bprogress/core';
 import { ProgressNavigateFunction, NavigateProgressOptions } from '../types';
 
 /**
