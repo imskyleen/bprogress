@@ -403,11 +403,11 @@ importers:
   packages/next:
     dependencies:
       '@bprogress/core':
-        specifier: ^1.1.17
-        version: 1.1.17
+        specifier: ^1.1.18
+        version: 1.1.18
       '@bprogress/react':
-        specifier: ^1.1.3
-        version: 1.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.1.4
+        version: 1.1.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@swc/core':
         specifier: ^1.10.16
@@ -452,8 +452,8 @@ importers:
   packages/react:
     dependencies:
       '@bprogress/core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: ^1.1.18
+        version: 1.1.18
     devDependencies:
       '@swc/core':
         specifier: ^1.10.16
@@ -510,11 +510,11 @@ importers:
   packages/remix:
     dependencies:
       '@bprogress/core':
-        specifier: ^1.1.17
-        version: 1.1.17
+        specifier: ^1.1.18
+        version: 1.1.18
       '@bprogress/react':
-        specifier: ^1.1.3
-        version: 1.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.1.4
+        version: 1.1.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@remix-run/react':
         specifier: ^2.15.3
@@ -1363,11 +1363,11 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  '@bprogress/core@1.1.17':
-    resolution: {integrity: sha512-kbyq/w9hhxDEDCCd12vl2BCKv8Yj40H/olmrX1NBGM380jD8wdiHRWT93xf7N4X7X3kTqQPypY/Jk86StFqziw==}
+  '@bprogress/core@1.1.18':
+    resolution: {integrity: sha512-+khsDSJ7jv1L9LU34jnEsNqY6tXViSZDOeoxd09Ws8zVXzFjatRzWwBpiDQqTqyVZc0nlOxkkumFDtAgDJwY2A==}
 
-  '@bprogress/react@1.1.3':
-    resolution: {integrity: sha512-i9MJH4uQGFkN2Y9TCII9FmI7xd6PAE3OhjsnWaOO6wttuCclLEysRZ+PBaHX8y23tO/Y4JSEKe1qbyn08LUsVQ==}
+  '@bprogress/react@1.1.4':
+    resolution: {integrity: sha512-faAGNitciEk5vQfu5eoojFZqHLAe/oB4OeEj5zO15kTBZyLy1v9vs1BOX2u/YYnNx6/IeZQlBvENF4nZwjbZSw==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -11467,11 +11467,11 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@bprogress/core@1.1.17': {}
+  '@bprogress/core@1.1.18': {}
 
-  '@bprogress/react@1.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@bprogress/react@1.1.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@bprogress/core': 1.1.17
+      '@bprogress/core': 1.1.18
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
