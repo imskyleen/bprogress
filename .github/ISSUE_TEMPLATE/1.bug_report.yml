@@ -5,7 +5,7 @@ body:
   - type: textarea
     attributes:
       label: Description
-      description: A detailed description of the issue that you are encountering, and how other people can reproduce it. This includes helpful information such as the API you are using, the framework, etc.
+      description: A detailed description of the issue that you are encountering, and how other people can reproduce it. This includes useful information such as the framework you use, how you use BProgress, etc.
       placeholder: |
         Reproduction steps...
     validations:
