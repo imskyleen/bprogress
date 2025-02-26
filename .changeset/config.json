@@ -7,6 +7,16 @@
   "access": "restricted",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": [],
-  "publish": false
+  "ignore": [
+    "apps/remix-app",
+    "apps/pages-app-dir",
+    "apps/next-app-dir",
+    "apps/html",
+    "apps/docs",
+    "apps/create-react-app"
+  ],
+  "publish": false,
+  "version": {
+    "mode": "independent"
+  }
 }
