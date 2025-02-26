@@ -28,7 +28,7 @@ const router = useRouter();
 ## Options
 
 ```ts
-useRouter(options?: RouterProgressOptions)
+useRouter(options?: RouterProgressOptions): AppRouterProgressInstance;
 ```
 
 | Name | Type | Default | Description |
@@ -38,6 +38,10 @@ useRouter(options?: RouterProgressOptions)
 | disableSameURL | boolean | `true` | Disable the progress bar when the URL is the same. |
 | basePath | string | undefined | The base path if you use a `basePath` in your app. |
 | customRouter | () => AppRouterInstance | undefined | A custom router instance. |
+
+<Callout title="Note">
+  By default, if you do not specify any options when calling a router method, the options defined during the initialization of the `useRouter` hook will be applied. However, if you provide specific options in the method call (`push`, `replace`, `back`, `refresh`), these will take precedence and override the default options set in the hook.
+</Callout>
 
 ### RouterProgressOptions
 
@@ -51,9 +55,25 @@ interface RouterProgressOptions {
 }
 ```
 
-<Callout title="Note">
-  By default, if you do not specify any options when calling a router method, the options defined during the initialization of the `useRouter` hook will be applied. However, if you provide specific options in the method call (`push`, `replace`, `back`, `refresh`), these will take precedence and override the default options set in the hook.
-</Callout>
+### AppRouterProgressInstance
+
+```tsx
+interface AppRouterProgressInstance {
+  back(progressOptions?: RouterActionsProgressOptions): void;
+  forward(progressOptions?: RouterActionsProgressOptions): void;
+  refresh(progressOptions?: RouterActionsProgressOptions): void;
+  push(
+    href: string,
+    options?: NavigateOptions,
+    progressOptions?: RouterActionsProgressOptions,
+  ): void;
+  replace(
+    href: string,
+    options?: NavigateOptions,
+    progressOptions?: RouterActionsProgressOptions,
+  ): void;
+}
+```
 
 ## Methods
 
@@ -105,6 +125,22 @@ router.back();
 router.back(progressOptions?: RouterProgressOptions)
 ```
 
+### forward
+
+#### Usage
+
+Goes forward in the history stack.
+
+```tsx
+router.forward();
+```
+
+#### Types
+
+```tsx
+router.forward(progressOptions?: RouterProgressOptions)
+```
+
 ### refresh
 
 #### Usage
@@ -128,8 +164,9 @@ router.refresh(progressOptions?: RouterProgressOptions)
 ```tsx
 router.push('/about', undefined, { disableSameURL: true });
 router.replace('/?counter=10', undefined, { disableSameURL: true });
-router.back({ disableSameURL: true });
-router.refresh({ disableSameURL: true });
+router.back({ startPosition: 0.3 });
+router.forward({ startPosition: 0.3 });
+router.refresh({ startPosition: 0.3 });
 ```
 
 

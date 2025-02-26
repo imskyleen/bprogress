@@ -66,6 +66,8 @@ export default function Home() {
       <Link href="/dashboard" data-disable-progress={true}>
         Link with bprogress disabled
       </Link>
+      <button onClick={() => router.back()}>Back</button>
+      <button onClick={() => router.forward()}>Forward</button>
       <button onClick={() => router.push('/')}>Push same url</button>
       <button onClick={() => router.push('/dashboard')}>Push Dashboard</button>
       <button onClick={() => router.refresh()}>Refresh</button>

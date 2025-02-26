@@ -20,6 +20,8 @@ const Dashboard = () => {
         Pushing same url have no effect
       </button>
 
+      <button onClick={() => router.forward()}>Forward</button>
+
       <button className="back" onClick={() => router.back()}>
         Back
       </button>
