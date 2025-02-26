@@ -1,8 +1,9 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useRef } from 'react';
 import { BProgress, isSameURL } from '@bprogress/core';
 import { useRouter as useNextRouter } from 'next/navigation';
 import type { NavigateOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import type {
+  AppRouterProgressInstance,
   RouterActionsProgressOptions,
   RouterProgressOptions,
 } from '../types';
@@ -13,7 +14,9 @@ import type {
  * @param options - Router progress options including default settings and a custom router function.
  * @returns An enhanced router with additional methods (push, replace, back, refresh) that trigger the progress bar.
  */
-export function useRouter(options?: RouterProgressOptions) {
+export function useRouter(
+  options?: RouterProgressOptions,
+): AppRouterProgressInstance {
   const { customRouter, ...defaultProgressOptions } = options || {};
 
   // Select the router: use the custom router if provided, otherwise use Next.js router.
@@ -120,10 +123,34 @@ export function useRouter(options?: RouterProgressOptions) {
     [router, defaultProgressOptions, startProgress, stopProgress],
   );
 
-  // Merge the original router with the enhanced methods.
-  const enhancedRouter = useMemo(() => {
-    return { ...router, push, replace, back, refresh };
-  }, [router, push, replace, back, refresh]);
+  const forward = useCallback(
+    (progressOptions?: RouterActionsProgressOptions) => {
+      const mergedOptions = { ...defaultProgressOptions, ...progressOptions };
+      if (mergedOptions.showProgress === false) return router.forward();
+      startProgress(mergedOptions.startPosition);
+      stopProgress();
+      return router.forward();
+    },
+    [router, defaultProgressOptions, startProgress, stopProgress],
+  );
 
-  return enhancedRouter;
+  const extendedRouterRef = useRef<AppRouterProgressInstance | null>(null);
+
+  if (!extendedRouterRef.current) {
+    extendedRouterRef.current = Object.assign({}, router, {
+      push,
+      replace,
+      back,
+      refresh,
+      forward,
+    });
+  } else {
+    extendedRouterRef.current.push = push;
+    extendedRouterRef.current.replace = replace;
+    extendedRouterRef.current.back = back;
+    extendedRouterRef.current.refresh = refresh;
+    extendedRouterRef.current.forward = forward;
+  }
+
+  return extendedRouterRef.current;
 }

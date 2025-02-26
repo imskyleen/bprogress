@@ -4,7 +4,10 @@ import type {
   RouterProgressProps,
   RouterProgressProviderProps,
 } from '@bprogress/react';
-import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import type {
+  AppRouterInstance,
+  NavigateOptions,
+} from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 export interface PagesProgressProps extends RouterProgressProps {}
 export interface PagesProgressProviderProps
@@ -31,4 +34,37 @@ export interface RouterActionsProgressOptions {
  */
 export interface RouterProgressOptions extends RouterActionsProgressOptions {
   customRouter?: () => AppRouterInstance;
+}
+
+export interface AppRouterProgressInstance extends AppRouterInstance {
+  /**
+   * Navigate to the previous history entry.
+   */
+  back(progressOptions?: RouterActionsProgressOptions): void;
+  /**
+   * Navigate to the next history entry.
+   */
+  forward(progressOptions?: RouterActionsProgressOptions): void;
+  /**
+   * Refresh the current page.
+   */
+  refresh(progressOptions?: RouterActionsProgressOptions): void;
+  /**
+   * Navigate to the provided href.
+   * Pushes a new history entry.
+   */
+  push(
+    href: string,
+    options?: NavigateOptions,
+    progressOptions?: RouterActionsProgressOptions,
+  ): void;
+  /**
+   * Navigate to the provided href.
+   * Replaces the current history entry.
+   */
+  replace(
+    href: string,
+    options?: NavigateOptions,
+    progressOptions?: RouterActionsProgressOptions,
+  ): void;
 }
