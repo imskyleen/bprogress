@@ -1,5 +1,12 @@
 # @bprogress/next
 
+## 3.2.0
+
+### Minor Changes
+
+- refactor: rewriting the router to make it lighter
+- feat: rework `useRouter` to support custom router options
+
 ## 3.1.3
 
 ### Patch Changes

@@ -3,7 +3,14 @@ title: useRouter (app dir)
 description: Use `useRouter` hook
 ---
 
-import { Callout } from 'fumadocs-ui/components/callout';
+<Callout type="warn" title="Breaking Change">
+  As of version `3.2.0`, router `push` and `replace` methods now have only 2 parameters (`href` and `options`).
+  You can modify your router calls as follows:
+  ```diff
+  - router.push('/dashboard', { scroll: false }, { startPosition: 0.3 })
+  + router.push('/dashboard', { scroll: false, startPosition: 0.3 })
+  ```
+</Callout>
 
 The app directory router doesn't manage routes like the page directory router. So we need a custom router that extends the Next.js router and enables the progress bar.
 
@@ -45,7 +52,7 @@ useRouter(options?: RouterProgressOptions): AppRouterProgressInstance;
 
 ### RouterProgressOptions
 
-```tsx
+```ts
 interface RouterProgressOptions {
   showProgress?: boolean;
   startPosition?: number;
@@ -57,22 +64,24 @@ interface RouterProgressOptions {
 
 ### AppRouterProgressInstance
 
-```tsx
-interface AppRouterProgressInstance {
-  back(progressOptions?: RouterActionsProgressOptions): void;
-  forward(progressOptions?: RouterActionsProgressOptions): void;
-  refresh(progressOptions?: RouterActionsProgressOptions): void;
-  push(
-    href: string,
-    options?: NavigateOptions,
-    progressOptions?: RouterActionsProgressOptions,
-  ): void;
-  replace(
-    href: string,
-    options?: NavigateOptions,
-    progressOptions?: RouterActionsProgressOptions,
-  ): void;
+```ts
+export interface AppRouterProgressInstance<
+  ROpts = NavigateOptions,
+  POtps = PrefetchOptions,
+> {
+  push(href: string, options?: CombinedRouterOptions<ROpts>): void;
+  replace(href: string, options?: CombinedRouterOptions<ROpts>): void;
+  prefetch(href: string, options?: POtps): void;
+  back(options?: CombinedRouterOptions<ROpts>): void;
+  refresh(options?: CombinedRouterOptions<ROpts>): void;
+  forward(options?: CombinedRouterOptions<ROpts>): void;
 }
+```
+
+### CombinedRouterOptions
+
+```ts
+export type CombinedRouterOptions<ROpts> = ROpts & RouterActionsProgressOptions;
 ```
 
 ## Methods
@@ -83,14 +92,14 @@ interface AppRouterProgressInstance {
 
 Pushes a new entry onto the history stack.
 
-```tsx
+```ts
 router.push('/about');
 ```
 
 #### Types
 
-```tsx
-router.push(url: string, options?: NavigateOptions, progressOptions?: RouterProgressOptions)
+```ts
+router.push(url: string, options?:CombinedRouterOptions<ROpts>)
 ```
 
 ### replace
@@ -99,14 +108,14 @@ router.push(url: string, options?: NavigateOptions, progressOptions?: RouterProg
 
 Replaces the current entry on the history stack.
 
-```tsx
+```ts
 router.replace('/?counter=10');
 ```
 
 #### Types
 
-```tsx
-router.replace(url: string, options?: NavigateOptions, progressOptions?: RouterProgressOptions)
+```ts
+router.replace(url: string, options?: CombinedRouterOptions<ROpts>)
 ```
 
 ### back
@@ -115,14 +124,14 @@ router.replace(url: string, options?: NavigateOptions, progressOptions?: RouterP
 
 Goes back in the history stack.
 
-```tsx
+```ts
 router.back();
 ```
 
 #### Types
 
 ```tsx
-router.back(progressOptions?: RouterProgressOptions)
+router.back(options?: CombinedRouterOptions<ROpts>)
 ```
 
 ### forward
@@ -138,7 +147,7 @@ router.forward();
 #### Types
 
 ```tsx
-router.forward(progressOptions?: RouterProgressOptions)
+router.forward(options?: CombinedRouterOptions<ROpts>)
 ```
 
 ### refresh
@@ -154,7 +163,7 @@ router.refresh();
 #### Types
 
 ```tsx
-router.refresh(progressOptions?: RouterProgressOptions)
+router.refresh(options?: CombinedRouterOptions<ROpts>)
 ```
 
 ## Options
@@ -162,8 +171,8 @@ router.refresh(progressOptions?: RouterProgressOptions)
 ### Usage
 
 ```tsx
-router.push('/about', undefined, { disableSameURL: true });
-router.replace('/?counter=10', undefined, { disableSameURL: true });
+router.push('/about', { disableSameURL: true });
+router.replace('/?counter=10', { disableSameURL: true });
 router.back({ startPosition: 0.3 });
 router.forward({ startPosition: 0.3 });
 router.refresh({ startPosition: 0.3 });
@@ -178,6 +187,7 @@ router.refresh({ startPosition: 0.3 });
 | startPosition | number | undefined | The start position of the progress bar. |
 | disableSameURL | boolean | `true` | Disable the progress bar when the URL is the same. |
 | basePath | string | undefined | The base path if you use a `basePath` in your app. |
+| _...customRouterOptions_ | any | undefined | Any custom options for the router, by default we use the next `NavigateOptions`. |
 
 <Callout title="Note">
   The `showProgress` option set to `false` disables the progress bar. However, if you don't want to see the progress bar during a router action, we recommend you use the Next.js router directly.
@@ -191,5 +201,27 @@ interface RouterProgressOptions {
   startPosition?: number;
   disableSameURL?: boolean;
   basePath?: string;
+}
+```
+
+## Example with `next-intl` custom router
+
+```tsx
+import { useRouter } from '@bprogress/next/app';
+import { useRouter as useNextIntlRouter } from '@/i18n/navigation';
+
+export default function Home() {
+  const router = useRouter({
+    customRouter: useNextIntlRouter,
+  });
+
+  return (
+    <button onClick={() => router.push('/about', {
+      startPosition: 0.3,
+      locale: 'en',
+    })}>
+      Go to about page
+    </button>
+  );
 }
 ```

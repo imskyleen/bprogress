@@ -1,11 +1,15 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useProgress } from '@bprogress/next';
 import { useRouter } from '@bprogress/next/app';
+import { useRouter as useNextIntlRouter } from '@/i18n/navigation';
 
 export default function Home() {
-  const router = useRouter();
+  const router = useRouter({
+    customRouter: useNextIntlRouter,
+  });
+  const nextIntlRouter = useNextIntlRouter();
   const { start, stop, pause, resume, getOptions, setOptions } = useProgress();
 
   return (
@@ -40,6 +44,10 @@ export default function Home() {
         Resume progress
       </button>
 
+      <button onClick={() => nextIntlRouter.push('/dashboard')}>
+        Dashboard
+      </button>
+
       <Link href="/">Same route</Link>
       <Link href="/?test=param">Sallow</Link>
       <Link href="/dashboard">Dashboard</Link>
@@ -71,39 +79,50 @@ export default function Home() {
       <button onClick={() => router.forward()}>Forward</button>
       <button
         onClick={() =>
-          router.push('/', undefined, {
+          router.push('/', {
             disableSameURL: false,
+            i18nPath: true,
           })
         }
       >
         Push disableSameURL false
       </button>
-      <button onClick={() => router.push('/dashboard')}>Push Dashboard</button>
+      <button
+        onClick={() =>
+          router.push('/dashboard', {
+            locale: 'en',
+            i18nPath: true,
+          })
+        }
+      >
+        Push Dashboard
+      </button>
       <button onClick={() => router.refresh()}>Refresh</button>
       <button
         onClick={() =>
-          router.push('/', undefined, {
+          router.push('/', {
             disableSameURL: true,
+            i18nPath: true,
           })
         }
       >
         Push with disableSameURL true
       </button>
-      <button className="replace" onClick={() => router.replace('/dashboard')}>
+      <button
+        className="replace"
+        onClick={() => router.replace('/dashboard', { i18nPath: true })}
+      >
         Replace Dashboard
       </button>
-      <button onClick={() => router.push('/?test=param')}>
+      <button onClick={() => router.push('/?test=param', { i18nPath: true })}>
         Push with param
       </button>
       <button
         onClick={() =>
-          router.push(
-            '/dashboard',
-            {},
-            {
-              showProgress: false,
-            },
-          )
+          router.push('/dashboard', {
+            showProgress: false,
+            i18nPath: true,
+          })
         }
       >
         Push Dashboard without progress bar

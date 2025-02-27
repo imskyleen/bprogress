@@ -1,155 +1,184 @@
-import { useCallback, useRef } from 'react';
-import { BProgress, isSameURL } from '@bprogress/core';
-import { useRouter as useNextRouter } from 'next/navigation.js';
-import type { NavigateOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
+  AppRouterInstance,
   AppRouterProgressInstance,
-  RouterActionsProgressOptions,
+  InferPrefetchOptions,
+  InferRouterOptions,
   RouterProgressOptions,
 } from '../types';
+import { useRouter as useNextRouter } from 'next/navigation.js';
+import { useRef } from 'react';
+import { BProgress, isSameURL } from '@bprogress/core';
+import { AppRouterInstance as NextAppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 /**
- * Custom hook that extends the Next.js router with progress bar functionality.
- *
- * @param options - Router progress options including default settings and a custom router function.
- * @returns An enhanced router with additional methods (push, replace, back, refresh) that trigger the progress bar.
+ * Helper function that removes the first path segment from a URL.
+ * This is used to ignore the locale prefix in i18n configurations.
  */
-export function useRouter(
-  options?: RouterProgressOptions,
-): AppRouterProgressInstance {
+function removeFirstPathSegment(url: URL): URL {
+  const parts = url.pathname.split('/');
+  if (parts.length > 1 && parts[1]) {
+    parts.splice(1, 1);
+    url.pathname = parts.join('/') || '/';
+  }
+  return url;
+}
+
+/**
+ * Custom hook that extends the router (Next.js or custom) with progress bar functionality.
+ *
+ * With this signature, if a custom router is provided, its push method's options are automatically inferred.
+ *
+ * @param options Progress bar options and/or custom router.
+ * @returns An extended router with push, replace, prefetch, back, refresh, and forward methods that manage the progress bar.
+ */
+export function useRouter<
+  Custom extends AppRouterInstance = NextAppRouterInstance,
+  ROpts = InferRouterOptions<Custom>,
+  POpts = InferPrefetchOptions<Custom>,
+>(
+  options?: RouterProgressOptions & { customRouter?: () => Custom },
+): AppRouterProgressInstance<ROpts, POpts> {
   const { customRouter, ...defaultProgressOptions } = options || {};
+  const router: AppRouterInstance = customRouter
+    ? customRouter()
+    : // eslint-disable-next-line react-hooks/rules-of-hooks
+      useNextRouter();
 
-  // Select the router: use the custom router if provided, otherwise use Next.js router.
-  const useSelectedRouter = useCallback(() => {
-    if (customRouter) return customRouter();
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    return useNextRouter();
-  }, [customRouter]);
+  // Using a ref to keep a stable reference of the extended router.
+  const extendedRouterRef = useRef<AppRouterProgressInstance<
+    ROpts,
+    POpts
+  > | null>(null);
 
-  const router = useSelectedRouter();
+  /**
+   * Generic function to create a handler for methods that require an href (push, replace).
+   * It extracts the progress options and passes the rest as router-specific options.
+   */
+  function createHandler<Fn extends (href: string, opts?: any) => void>(
+    fn: Fn,
+  ) {
+    return (href: string, options?: any): void => {
+      const {
+        showProgress,
+        startPosition,
+        disableSameURL,
+        basePath,
+        i18nPath,
+        ...routerOpts
+      } = options || {};
+      const progressOpts = {
+        ...defaultProgressOptions,
+        showProgress,
+        startPosition,
+        disableSameURL,
+        basePath,
+        i18nPath,
+      };
 
-  const startProgress = useCallback((startPosition?: number) => {
-    if (startPosition && startPosition > 0) BProgress.set(startPosition);
-    BProgress.start();
-  }, []);
-
-  const stopProgress = useCallback(() => {
-    if (!BProgress.isStarted()) return;
-    BProgress.done();
-  }, []);
-
-  const progress = useCallback(
-    (
-      href: string,
-      method: 'push' | 'replace',
-      optionsNav?: NavigateOptions,
-      progressOptions?: RouterActionsProgressOptions,
-    ) => {
-      // Merge default progress options with the ones provided at the call.
-      const mergedOptions = { ...defaultProgressOptions, ...progressOptions };
-
-      // If progress is disabled, navigate directly.
-      if (mergedOptions.showProgress === false) {
-        return router[method](href, optionsNav);
+      if (progressOpts.showProgress === false) {
+        return fn(href, routerOpts);
       }
 
-      const currentUrl = new URL(location.href);
+      let currentUrl = new URL(location.href);
       const targetUrl = new URL(href, location.href);
 
-      // If a basePath is provided, prepend it to the target pathname.
-      if (mergedOptions.basePath) {
+      if (progressOpts.i18nPath) {
+        currentUrl = removeFirstPathSegment(currentUrl);
+      }
+
+      if (progressOpts.basePath) {
         targetUrl.pathname =
-          mergedOptions.basePath +
+          progressOpts.basePath +
           (targetUrl.pathname !== '/' ? targetUrl.pathname : '');
       }
 
       const sameURL = isSameURL(targetUrl, currentUrl);
 
-      // If the URL is the same and disableSameURL is enabled, navigate directly.
-      if (sameURL && mergedOptions.disableSameURL !== false) {
-        return router[method](href, optionsNav);
+      if (sameURL && progressOpts.disableSameURL !== false) {
+        return fn(href, routerOpts);
       }
 
-      startProgress(mergedOptions.startPosition);
+      if (progressOpts.startPosition && progressOpts.startPosition > 0) {
+        BProgress.set(progressOpts.startPosition);
+      }
 
-      // If navigating to the same URL, stop the progress bar immediately.
-      if (sameURL) stopProgress();
+      BProgress.start();
 
-      return router[method](href, optionsNav);
-    },
-    [router, defaultProgressOptions, startProgress, stopProgress],
-  );
+      if (sameURL) BProgress.done();
 
-  const push = useCallback(
-    (
-      href: string,
-      optionsNav?: NavigateOptions,
-      progressOptions?: RouterActionsProgressOptions,
-    ) => {
-      progress(href, 'push', optionsNav, progressOptions);
-    },
-    [progress],
-  );
+      return fn(href, routerOpts);
+    };
+  }
 
-  const replace = useCallback(
-    (
-      href: string,
-      optionsNav?: NavigateOptions,
-      progressOptions?: RouterActionsProgressOptions,
-    ) => {
-      progress(href, 'replace', optionsNav, progressOptions);
-    },
-    [progress],
-  );
+  /**
+   * Handler for methods that do not require an href (back, refresh, forward).
+   */
+  function createNoHrefHandler<Fn extends (opts?: any) => void>(fn: Fn) {
+    return (options?: any): void => {
+      const {
+        showProgress,
+        startPosition,
+        disableSameURL,
+        basePath,
+        i18nPath,
+        ...routerOpts
+      } = options || {};
+      const progressOpts = {
+        ...defaultProgressOptions,
+        showProgress,
+        startPosition,
+        disableSameURL,
+        basePath,
+        i18nPath,
+      };
 
-  const back = useCallback(
-    (progressOptions?: RouterActionsProgressOptions) => {
-      const mergedOptions = { ...defaultProgressOptions, ...progressOptions };
-      if (mergedOptions.showProgress === false) return router.back();
-      startProgress(mergedOptions.startPosition);
-      return router.back();
-    },
-    [router, defaultProgressOptions, startProgress],
-  );
+      if (progressOpts.showProgress === false) {
+        return fn(routerOpts);
+      }
 
-  const refresh = useCallback(
-    (progressOptions?: RouterActionsProgressOptions) => {
-      const mergedOptions = { ...defaultProgressOptions, ...progressOptions };
-      if (mergedOptions.showProgress === false) return router.refresh();
-      startProgress(mergedOptions.startPosition);
-      stopProgress();
-      return router.refresh();
-    },
-    [router, defaultProgressOptions, startProgress, stopProgress],
-  );
+      if (progressOpts.startPosition && progressOpts.startPosition > 0) {
+        BProgress.set(progressOpts.startPosition);
+      }
 
-  const forward = useCallback(
-    (progressOptions?: RouterActionsProgressOptions) => {
-      const mergedOptions = { ...defaultProgressOptions, ...progressOptions };
-      if (mergedOptions.showProgress === false) return router.forward();
-      startProgress(mergedOptions.startPosition);
-      stopProgress();
-      return router.forward();
-    },
-    [router, defaultProgressOptions, startProgress, stopProgress],
-  );
+      BProgress.start();
 
-  const extendedRouterRef = useRef<AppRouterProgressInstance | null>(null);
+      const result = fn(routerOpts);
+
+      BProgress.done();
+
+      return result;
+    };
+  }
+
+  /**
+   * Handler for the prefetch method.
+   */
+  function createPrefetchHandler<Fn extends (href: string, opts?: any) => void>(
+    fn: Fn,
+  ) {
+    return (href: string, options?: POpts): void => {
+      return fn(href, options);
+    };
+  }
 
   if (!extendedRouterRef.current) {
-    extendedRouterRef.current = Object.assign({}, router, {
-      push,
-      replace,
-      back,
-      refresh,
-      forward,
-    });
+    extendedRouterRef.current = {
+      ...router,
+      push: createHandler(router.push),
+      replace: createHandler(router.replace),
+      prefetch: createPrefetchHandler(router.prefetch),
+      back: createNoHrefHandler(router.back),
+      refresh: createNoHrefHandler(router.refresh),
+      forward: createNoHrefHandler(router.forward),
+    } as AppRouterProgressInstance<ROpts, POpts>;
   } else {
-    extendedRouterRef.current.push = push;
-    extendedRouterRef.current.replace = replace;
-    extendedRouterRef.current.back = back;
-    extendedRouterRef.current.refresh = refresh;
-    extendedRouterRef.current.forward = forward;
+    extendedRouterRef.current.push = createHandler(router.push);
+    extendedRouterRef.current.replace = createHandler(router.replace);
+    extendedRouterRef.current.prefetch = createPrefetchHandler(router.prefetch);
+    extendedRouterRef.current.back = createNoHrefHandler(router.back);
+    extendedRouterRef.current.refresh = createNoHrefHandler(router.refresh);
+    extendedRouterRef.current.forward = createNoHrefHandler(router.forward);
   }
 
   return extendedRouterRef.current;
