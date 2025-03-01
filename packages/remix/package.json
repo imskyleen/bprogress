@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/remix",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Progress bar for Remix",
   "type": "module",
   "repository": {
@@ -21,7 +21,8 @@
     "lint": "eslint . --max-warnings 0",
     "build": "tsup",
     "dev": "tsup --watch",
-    "pub:release": "pnpm publish --no-git-checks --access public"
+    "pub:release": "pnpm publish --no-git-checks --access public",
+    "prepublishOnly": "pnpm lint && pnpm build"
   },
   "keywords": [
     "remix",
@@ -57,7 +58,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@bprogress/core": "^1.2.0",
-    "@bprogress/react": "^1.1.5"
+    "@bprogress/core": "^1.2.1",
+    "@bprogress/react": "^1.1.6"
   }
 }

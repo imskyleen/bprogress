@@ -1,5 +1,11 @@
 # @bprogress/core
 
+## 1.2.1
+
+### Patch Changes
+
+- fix: remove forgotten console.log
+
 ## 1.2.0
 
 ### Minor Changes

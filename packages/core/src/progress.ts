@@ -72,7 +72,6 @@ export class BProgress {
         const bar = progress.querySelector(
           this.settings.barSelector,
         ) as HTMLElement;
-        console.log('bar 1', bar);
         toCss(bar, this.barPositionCSS({ n, speed, ease }));
       });
 
@@ -243,7 +242,6 @@ export class BProgress {
       const bar = progress.querySelector(
         this.settings.barSelector,
       ) as HTMLElement;
-      console.log('bar 2', bar);
       const perc = fromStart
         ? toBarPerc(0, this.settings.direction)
         : toBarPerc(this.status || 0, this.settings.direction);

@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/next",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "type": "module",
   "description": "Progress bar for Next.js compatible with new app directory",
   "repository": {
@@ -32,7 +32,8 @@
     "lint": "eslint . --max-warnings 0",
     "build": "tsup",
     "dev": "tsup --watch",
-    "pub:release": "pnpm publish --no-git-checks --access public"
+    "pub:release": "pnpm publish --no-git-checks --access public",
+    "prepublishOnly": "pnpm lint && pnpm build"
   },
   "keywords": [
     "next",
@@ -70,7 +71,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@bprogress/core": "^1.2.0",
-    "@bprogress/react": "^1.1.5"
+    "@bprogress/core": "^1.2.1",
+    "@bprogress/react": "^1.1.6"
   }
 }

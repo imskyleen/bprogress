@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/core",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
   "description": "NProgress-inspired library with more features",
   "repository": {
@@ -39,6 +39,7 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "pub:release": "pnpm publish --no-git-checks --access public",
+    "prepublishOnly": "pnpm test && pnpm lint && pnpm build",
     "test": "jest"
   },
   "devDependencies": {
