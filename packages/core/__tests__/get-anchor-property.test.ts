@@ -4,7 +4,7 @@ import {
   addPathPrefix,
   getAnchorProperty,
   parsePath,
-} from '../../src/utils/get-anchor-property';
+} from '../src/lib/get-anchor-property';
 
 describe('parsePath', () => {
   it('returns the path with empty query/hash if there is no "?" or "#"', () => {

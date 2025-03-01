@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "__tests__", "shims-vue.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,71 @@
+{
+  "name": "@bprogress/vue",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Utility to create your own progress bar with Vue",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Skyleen77/bprogress/tree/main/packages/vue"
+  },
+  "bugs": {
+    "url": "https://github.com/Skyleen77/bprogress/issues"
+  },
+  "homepage": "https://bprogress.vercel.app/docs/vue/installation",
+  "main": "./dist/index.es.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "pub:release": "pnpm publish --no-git-checks --access public",
+    "prepublishOnly": "pnpm test && pnpm lint && pnpm build",
+    "test": "jest"
+  },
+  "keywords": [
+    "vue",
+    "vue nprogress",
+    "vue bprogress",
+    "vue progress",
+    "nprogress",
+    "bprogress",
+    "progress bar"
+  ],
+  "author": "Skyleen",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "@jest/globals": "^29.7.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/vue": "^8.1.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.12.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/compiler-sfc": "^3.5.13",
+    "@vue/test-utils": "^2.4.6",
+    "@vue/vue3-jest": "^29.2.6",
+    "babel-jest": "^29.7.0",
+    "eslint": "^9.19.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^26.0.0",
+    "ts-jest": "^29.2.5",
+    "tslib": "^2.8.1",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.1",
+    "vite-plugin-dts": "^4.5.0",
+    "vue": "^3.5.13",
+    "vue-jest": "^3.0.7",
+    "vue3-jest": "27.0.0-alpha.1"
+  },
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  },
+  "dependencies": {
+    "@bprogress/core": "^1.2.3"
+  }
+}

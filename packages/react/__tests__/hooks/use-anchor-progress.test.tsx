@@ -15,14 +15,10 @@ jest.mock('../../src/providers/progress-provider', () => ({
   }),
 }));
 
-// Mock URL comparison utilities to always return false (so that start is triggered)
+// Mock utils functions
 jest.mock('@bprogress/core', () => ({
   isSameURL: jest.fn(() => false),
   isSameURLWithoutSearch: jest.fn(() => false),
-}));
-
-// Mock getAnchorProperty to return the element's attribute value
-jest.mock('../../src/utils/get-anchor-property', () => ({
   getAnchorProperty: (element: HTMLElement, prop: string) => {
     return element.getAttribute(prop) || '';
   },

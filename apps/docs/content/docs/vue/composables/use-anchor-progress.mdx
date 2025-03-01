@@ -1,0 +1,67 @@
+---
+title: useAnchorProgress
+description: Use `useAnchorProgress` composable
+---
+
+import { ProgressTypeTable } from '../../../../components/progress-type-table';
+
+There are two ways to set up a progress bar that is triggered during navigation:
+1. **If the framework has a router that detects the start and end of navigation**, you can use the `useProgress` composable to trigger the progress bar at the start of navigation and stop it when you reach the target page.
+2. **If the framework has a router that doesn't provide built-in navigation detection**, you can use this `useAnchorProgress` composable to activate navigation detection based on `<a>` elements in the DOM and `window.history`.
+
+## Import
+
+```tsx
+import { useAnchorProgress } from '@bprogress/vue';
+```
+
+## Usage
+
+```tsx
+useAnchorProgress(
+  {
+    shallowRouting,
+    disableSameURL,
+    startPosition,
+    delay,
+    stopDelay,
+    targetPreprocessor,
+    disableAnchorClick,
+    startOnLoad,
+  },
+  [navigation],
+)
+```
+
+## Parameters
+
+```ts
+function useAnchorProgress(options: UseAnchorProgressOptions, deps: any[]): void;
+```
+
+### Options
+
+<ProgressTypeTable
+  displayTypes={["shallowRouting", "disableSameURL", "startPosition", "delay", "stopDelay", "targetPreprocessor", "disableAnchorClick", "startOnLoad", "forcedStopDelay"]}
+/>
+
+## Example
+
+```vue title="Progress.vue"
+<script setup lang="ts">
+import { useAnchorProgress } from '@bprogress/vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+
+useAnchorProgress(
+  {
+    startPosition: 0.3,
+    delay: 100,
+    stopDelay: 300,
+    forcedStopDelay: 500,
+  },
+  [route.fullPath],
+);
+</script>
+```

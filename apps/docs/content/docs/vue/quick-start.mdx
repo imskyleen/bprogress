@@ -1,0 +1,58 @@
+---
+title: Quick Start
+description: Get started with BProgress in your Vue application
+---
+
+import { SiNextdotjs } from "react-icons/si";
+import { HiDotsHorizontal } from "react-icons/hi";
+
+## Import
+
+```tsx
+import { ProgressProvider } from '@bprogress/vue';
+```
+
+## Usage
+
+```vue
+<ProgressProvider>
+  ...
+</ProgressProvider>
+```
+
+## Example
+
+```vue title="src/Root.vue"
+<script setup lang="ts">
+import App from './App.vue'
+import { ProgressProvider } from '@bprogress/vue'
+</script>
+
+<template>
+  <ProgressProvider>
+    <App />
+  </ProgressProvider>
+</template>
+```
+
+```ts title="src/main.ts"
+import { createApp } from 'vue';
+import Root from './Root.vue';
+
+createApp(Root).mount('#app');
+```
+
+```vue title="src/App.vue"
+<script setup lang="ts">
+import { useProgress } from '@bprogress/vue';
+
+const { start, stop, pause, resume } = useProgress();
+</script>
+
+<template>
+  <button @click="start()">Start</button>
+  <button @click="stop()">Stop</button>
+  <button @click="pause">Pause</button>
+  <button @click="resume">Resume</button>
+</template>
+```

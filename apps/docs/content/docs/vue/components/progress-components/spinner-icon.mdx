@@ -1,0 +1,37 @@
+---
+title: SpinnerIcon
+description: Use the `SpinnerIcon` component
+---
+
+The `SpinnerIcon` component must be used inside the `Spinner` component.
+
+## Import
+
+```vue
+<script setup lang="ts">
+import { SpinnerIcon } from '@bprogress/...';
+</script>
+```
+
+<Callout title="Note">
+  Replace the `...` in the import with the library you're using. For example, if you use `@bprogress/nuxt`, import by doing `from '@bprogress/nuxt'`
+</Callout>
+
+## Usage
+
+This component is used to display the spinner icon.
+
+```vue
+<template>
+  <SpinnerIcon />
+</template>
+```
+
+## Props
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| is | `string \| Component` | `'div'` | The component or HTML element to render. This prop uses Vue's is attribute for dynamic rendering. |
+| class | `ClassValue` | `undefinded` | The class of the progress element |
+| classSelector | `string` | `'peg'` | The class selector of the progress element (depends on your css) |
+| ...rest | `HTMLAttributes` | - | Other attributes passed down to the rendered element |

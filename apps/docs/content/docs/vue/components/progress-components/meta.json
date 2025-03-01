@@ -1,0 +1,5 @@
+{
+  "title": "Progress Components",
+  "root": false,
+  "pages": ["progress", "bar", "peg", "spinner", "spinner-icon"]
+}

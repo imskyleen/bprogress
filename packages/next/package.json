@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/next",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "type": "module",
   "description": "Progress bar for Next.js compatible with new app directory",
   "repository": {
@@ -71,7 +71,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@bprogress/core": "^1.2.1",
-    "@bprogress/react": "^1.1.6"
+    "@bprogress/core": "^1.2.3",
+    "@bprogress/react": "^1.1.7"
   }
 }

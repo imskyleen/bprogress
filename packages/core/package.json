@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/core",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "type": "module",
   "description": "NProgress-inspired library with more features",
   "repository": {

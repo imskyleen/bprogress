@@ -34,7 +34,10 @@ Use **jsDelivr**:
 
 The following frameworks have a dedicated package for using BProgress:
 
+- [React](https://www.npmjs.com/package/@bprogress/react)
 - [Next.js](https://www.npmjs.com/package/@bprogress/next)
+- [Remix](https://www.npmjs.com/package/@bprogress/remix)
+- [Vue](https://www.npmjs.com/package/@bprogress/vue)
 
 ## Quick Start
 

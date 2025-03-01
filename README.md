@@ -12,10 +12,13 @@ It helps users understand that a new page or content is being loaded, making nav
 
 ## Packages
 
-- **Core**: [@bprogress/core](https://github.com/Skyleen77/bprogress/tree/main/packages/core)
-- **React**: [@bprogress/react](https://github.com/Skyleen77/bprogress/tree/main/packages/react)
-- **Next.js**: [@bprogress/next](https://github.com/Skyleen77/bprogress/tree/main/packages/next)
-- **Remix v2**: [@bprogress/remix](https://github.com/Skyleen77/bprogress/tree/main/packages/remix)
+| Package     | Lien                                                               | Changelog                                                                                 |
+| ----------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| **Core**    | [@bprogress/core](https://www.npmjs.com/package/@bprogress/core)   | [CHANGELOG](https://github.com/Skyleen77/bprogress/tree/main/packages/core/CHANGELOG.md)  |
+| **React**   | [@bprogress/react](https://www.npmjs.com/package/@bprogress/react) | [CHANGELOG](https://github.com/Skyleen77/bprogress/tree/main/packages/react/CHANGELOG.md) |
+| **Next.js** | [@bprogress/next](https://www.npmjs.com/package/@bprogress/next)   | [CHANGELOG](https://github.com/Skyleen77/bprogress/tree/main/packages/next/CHANGELOG.md)  |
+| **Remix**   | [@bprogress/remix](https://www.npmjs.com/package/@bprogress/remix) | [CHANGELOG](https://github.com/Skyleen77/bprogress/tree/main/packages/remix/CHANGELOG.md) |
+| **Vue**     | [@bprogress/vue](https://www.npmjs.com/package/@bprogress/vue)     | [CHANGELOG](https://github.com/Skyleen77/bprogress/tree/main/packages/vue/CHANGELOG.md)   |
 
 ## Documentation
 

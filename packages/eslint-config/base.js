@@ -20,6 +20,7 @@ export const config = [
     rules: {
       'turbo/no-undeclared-env-vars': 'warn',
       'no-prototype-builtins': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
     },
   },
   {

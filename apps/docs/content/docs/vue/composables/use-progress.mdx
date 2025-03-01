@@ -1,0 +1,113 @@
+---
+title: useProgress
+description: Use `useProgress` composable
+---
+
+The `useProgress` composable is used to manipulate the progress state.
+
+## Import
+
+```tsx
+import { useProgress } from '@bprogress/...';
+```
+
+<Callout title="Note">
+  Replace the `...` in the import with the library you're using. For example, if you use `@bprogress/nuxt`, import by doing `from '@bprogress/nuxt'`
+</Callout>
+
+## Usage
+
+```tsx
+const { start, stop, inc, set, pause, resume, setOptions, getOptions } = useProgress();
+```
+
+## Methods
+
+### start
+
+Start the progress bar.
+
+```tsx
+start();
+// or
+start(0.3, 1000);
+```
+
+### stop
+
+Stop the progress bar.
+
+```tsx
+stop();
+// or
+stop(1000);
+```
+
+### inc
+
+Increase the progress bar (between 0 and 1).
+
+```tsx
+inc(0.1);
+```
+
+### set
+
+Set the progress bar (between 0 and 1).
+
+```tsx
+set(0.5);
+```
+
+### pause
+
+Pause the progress bar.
+
+```tsx
+pause();
+```
+
+### resume
+
+Resume the progress bar.
+
+```tsx
+resume();
+```
+
+### setOptions
+
+Set the progress bar options.
+
+```tsx
+setOptions({ showSpinner: false });
+// or
+setOptions((options) => ({ ...options, showSpinner: true }));
+```
+
+### getOptions
+
+Get the progress bar options.
+
+```tsx
+const options = getOptions();
+```
+
+## Types
+
+```ts
+interface ProgressContextValue {
+  start: (startPosition?: number, delay?: number) => void;
+  stop: (stopDelay?: number, forcedStopDelay?: number) => void;
+  inc: (amount?: number) => void;
+  set: (n: number) => void;
+  pause: () => void;
+  resume: () => void;
+  setOptions: (
+    options:
+      | Partial<BProgressOptions>
+      | ((prevOptions: BProgressOptions) => Partial<BProgressOptions>),
+  ) => void;
+  getOptions: () => BProgressOptions;
+}
+```

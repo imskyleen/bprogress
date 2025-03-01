@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { isSameURL, isSameURLWithoutSearch } from '@bprogress/core';
-import { getAnchorProperty } from '../utils/get-anchor-property';
+import {
+  isSameURL,
+  isSameURLWithoutSearch,
+  getAnchorProperty,
+} from '@bprogress/core';
 import { useProgress } from '../providers/progress-provider';
 import type { UseAnchorProgressOptions } from '../types';
 

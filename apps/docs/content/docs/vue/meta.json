@@ -1,0 +1,15 @@
+{
+  "title": "Vue",
+  "root": false,
+  "pages": [
+    "---Guide---",
+    "installation",
+    "quick-start",
+    "---Components---",
+    "components/progress-provider",
+    "components/progress-components",
+    "---Composables---",
+    "composables/use-progress",
+    "composables/use-anchor-progress"
+  ]
+}

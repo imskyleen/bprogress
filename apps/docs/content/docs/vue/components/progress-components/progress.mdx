@@ -1,0 +1,127 @@
+---
+title: Progress
+description: Use one or more progress bars anywhere in your code
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+One of the great new features of **BProgress** version `1.1` is the ability to integrate one or more progress bars anywhere in your code.
+
+The `Progress` component is optional, meaning you can use it to create one or more progress bars in your code. If you don't, the default progress bar will be created automatically.
+
+<Callout type="warn" title="Warning">
+  When using a custom component for the progress bar, the component will not be dynamically added or removed from the DOM. Instead, it will simply toggle between `display: block` and `display: none`.  
+  This behavior may impact performance, especially if the component involves complex rendering or layout calculations.
+</Callout>
+
+## Progress
+
+### Import
+
+You can import the `Progress` component like this:
+
+```vue
+<script setup lang="ts">
+import { Progress } from '@bprogress/...';
+</script>
+```
+
+<Callout title="Note">
+  Replace the `...` in the import with the library you're using. For example, if you use `@bprogress/nuxt`, import by doing `from '@bprogress/nuxt'`
+</Callout>
+
+<Callout type='warn' title="Warning">
+  The `Progress` component must be used inside the `ProgressProvider` with the option `template` set to `null`.
+
+  ```vue
+  <template>
+    <ProgressProvider :options="{ template: null }">
+      <Progress />
+    </ProgressProvider>
+  </template>
+  ```
+</Callout>
+
+### Usage
+
+You can use one or more progressive components anywhere in your code.
+
+<Callout type='warn' title="Warning">
+  The `Progress` component has a `display:none;` style by default, and this will change to `display:block;` for display. You won't be able to play with the component's display property. 
+</Callout>
+
+You can use with no children:
+
+```vue
+<Progress />
+```
+
+This will automatically create a complete progress element like this:
+
+```vue
+<template>
+  <Progress>
+    <Bar>
+      <Peg />
+    </Bar>
+    <Spinner>
+      <SpinnerIcon />
+    </Spinner>
+  </Progress>
+</template>
+```
+
+You can also use any children you wish like this:
+
+```vue
+<template>
+  <Progress>
+    <Bar />
+  </Progress>
+</template>
+```
+
+This can be a good solution if you want to customize your `Progress` component with TailwindCSS classes like this:
+
+```vue
+<template>
+  <div class="fixed top-4 overflow-hidden inset-x-4 rounded-lg bg-neutral-100 h-10">
+    <Progress>
+      <Bar class="!absolute z-[9999] !bottom-0 !top-auto" />
+      <Spinner class="!top-16">
+        <SpinnerIcon />
+      </Spinner>
+    </Progress>
+  </div>
+</template>
+```
+
+<Callout title="Note">
+  Here we use `!` to set classes to `!important`, as we're using basic CSS. However, if you're using custom CSS or no CSS with the `disableStyle` property, you don't need to set the classes to `!important`. 
+</Callout>
+
+### Props
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| is | `string \| Component` | `'div'` | The component or HTML element to render. This prop uses Vue's is attribute for dynamic rendering. |
+| class | `ClassValue` | `undefinded` | The class of the progress element |
+| style | `string \| CSSProperties` | `{ display: 'none' }` | Custom styles. The component always adds `display: none;` to the provided styles before applying them to the root element. |
+| ...rest | `HTMLAttributes` | - | All additional props are forwarded to the rendered element. |
+
+## Advanced Usage
+
+To create absolute position progress bars inside elements that are not directly aligned with the screen edges, you'll need to set the `positionUsing` option to `width`.
+
+```vue
+<template>
+  <ProgressProvider :options="{ template: null, positionUsing: 'width' }">
+    <Progress />
+  </ProgressProvider>
+</template>
+```
+
+<Callout title="Note">
+  By default, `positionUsing` will give priority to `translate3d` (depending on browser compatibility), as this method leverages GPU acceleration, providing smoother animations and better performance, especially for complex or frequently updated UI elements. Using `translate3d` helps reduce layout recalculations and enhances rendering efficiency compared to other positioning methods.
+</Callout>

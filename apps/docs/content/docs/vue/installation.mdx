@@ -1,0 +1,62 @@
+---
+title: Installation
+description: Install BProgress in your Vue application
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { SiNextdotjs, SiNpm, SiRemix } from "react-icons/si";
+import { HiDotsHorizontal } from "react-icons/hi";
+import { FaGithub } from "react-icons/fa6";
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Installation
+
+To install BProgress, run the following command:
+
+<Tabs groupId="packageManager" items={['npm', 'pnpm', "yarn", "bun"]} persist>
+  <Tab value="npm">
+    ```bash
+    npm install @bprogress/vue
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @bprogress/vue
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @bprogress/vue
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @bprogress/vue
+    ```
+  </Tab>
+</Tabs>
+
+Now you are ready to use BProgress in your Vue application!
+
+<Callout type='warn' title="Warning">
+  The `@bprogress/vue` package is a **utility** that lets you easily manage a progress bar, while remaining flexible with regard to the router you're using. **It doesn't automatically start the progress bar when browsing**, so you'll have to manage this logic yourself, unless you're using one of the integrations below.
+</Callout>
+
+## React Frameworks Integrations
+
+<Cards>
+  <Card title="Soon..." icon={<HiDotsHorizontal />}>
+    More integrations coming soon...
+  </Card>
+</Cards>
+
+## Links
+
+<Cards>
+  <Card external title="NPM" href="https://www.npmjs.com/package/@bprogress/vue" icon={<SiNpm />}>
+    Check the package on NPM
+  </Card>
+  <Card external title="GitHub" href="https://github.com/Skyleen77/bprogress/tree/main/packages/vue" icon={<FaGithub />}>
+    Check the repository on GitHub
+  </Card>
+</Cards>
