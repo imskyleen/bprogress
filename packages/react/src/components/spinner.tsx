@@ -10,7 +10,6 @@ function SpinnerInner<T extends React.ElementType = 'div'>(
     as,
     children,
     className,
-    role = 'spinner',
     classSelector = 'spinner',
     ...rest
   }: SpinnerProps<T>,
@@ -22,7 +21,6 @@ function SpinnerInner<T extends React.ElementType = 'div'>(
     {
       ref,
       className: classNames(classSelector, className),
-      role,
       ...(rest as React.ComponentPropsWithoutRef<T>),
     },
     children,

@@ -17,10 +17,10 @@ describe('Spinner Component', () => {
     expect(getByText(text)).toBeInTheDocument();
   });
 
-  it('applies the default role "spinner"', () => {
+  it('applies the default class "spinner"', () => {
     const { container } = render(<Spinner />);
     const spinnerElement = container.firstChild as HTMLElement;
-    expect(spinnerElement).toHaveAttribute('role', 'spinner');
+    expect(spinnerElement).toHaveClass('spinner');
   });
 
   it('renders as a different element when the "as" prop is provided', () => {

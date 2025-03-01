@@ -8,7 +8,7 @@ import { SpinnerIcon } from './spinner-icon';
 
 export type ProgressProps<T extends React.ElementType = 'div'> = Omit<
   ProgressComponentProps<T>,
-  'role' | 'classSelector'
+  'classSelector'
 >;
 
 function ProgressInner<T extends React.ElementType = 'div'>(

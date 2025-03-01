@@ -17,10 +17,10 @@ describe('Bar Component', () => {
     expect(getByText(text)).toBeInTheDocument();
   });
 
-  it('applies the default role "bar"', () => {
+  it('applies the default class "bar"', () => {
     const { container } = render(<Bar />);
     const barElement = container.firstChild as HTMLElement;
-    expect(barElement).toHaveAttribute('role', 'bar');
+    expect(barElement).toHaveClass('bar');
   });
 
   it('renders as a different element when the "as" prop is provided', () => {

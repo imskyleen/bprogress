@@ -30,13 +30,11 @@ export interface ProgressContextValue {
  * @param children Children - @default undefined
  * @param className Custom class - @default undefined
  * @param classSelector Custom class selector - @default undefined
- * @param role Custom role - @default undefined
  */
 export type ProgressComponentProps<T extends React.ElementType = 'div'> = {
   as?: T;
   children?: React.ReactNode;
   classSelector?: string;
-  role?: string;
 } & React.ComponentPropsWithoutRef<T>;
 
 /**

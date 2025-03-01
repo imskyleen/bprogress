@@ -7,7 +7,9 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 To **clarify the library’s identity** and enable it to **evolve more freely**, we decided to move away from the name **NProgress-V2** and adopt a new identity: **BProgress**. This rebranding gives us the opportunity to **start fresh on a solid foundation, introduce new features, and provide more integration libraries** while fostering a richer ecosystem around the project.
 
-There are two differences with the `nprogress-v2` package. 
+There are some differences with the `nprogress-v2` package. 
+
+## Migration to BProgress `1.1`
 
 The first difference is the name of the `nprogress-v2` package, which is now called `@bprogress/core`. So you can change the import like this:
 
@@ -30,6 +32,25 @@ CSS has also changed, so if you're using custom CSS, be sure to rename all your 
 ```diff title=CSS
 - .nprogress
 + .bprogress
+```
+
+## Migration to BProgress `1.2`
+
+The difference is about the `template`, `barSelector` and `spinnerSelector` options. We no longer use roles as selectors, as the “bar” and “spinner” roles are not valid ARIA roles.
+
+So you can change your code like this (only if you use these options):
+
+```diff title=JavaScript
+- NProgress.configure({
+-   template: `<div class="bar" role="bar"><div class="peg"></div></div><div class="spinner" role="spinner"><div class="spinner-icon"></div></div>`,
+-   barSelector: '[role="bar"]',
+-   spinnerSelector: '[role="spinner"]',
+- });
++ BProgress.configure({
++   template: '<div class="bar"><div class="peg"></div></div><div class="spinner"><div class="spinner-icon"></div></div>',
++   barSelector: '.bar',
++   spinnerSelector: '.spinner',
++ });
 ```
 
 And then you can use the `BProgress` object as you would use the `NProgress` object.

@@ -6,14 +6,7 @@ export type BarProps<T extends React.ElementType = 'div'> =
   ProgressComponentProps<T>;
 
 function BarInner<T extends React.ElementType = 'div'>(
-  {
-    as,
-    children,
-    className,
-    role = 'bar',
-    classSelector = 'bar',
-    ...rest
-  }: BarProps<T>,
+  { as, children, className, classSelector = 'bar', ...rest }: BarProps<T>,
   ref: React.ForwardedRef<React.ComponentRef<T>>,
 ) {
   const Component = as ?? ('div' as T);
@@ -22,7 +15,6 @@ function BarInner<T extends React.ElementType = 'div'>(
     {
       ref,
       className: classNames(classSelector, className),
-      role,
       ...(rest as React.ComponentPropsWithoutRef<T>),
     },
     children,

@@ -4,7 +4,7 @@ import { classNames } from '../utils/classnames';
 
 export type SpinnerIconProps<T extends React.ElementType = 'div'> = Omit<
   ProgressComponentProps<T>,
-  'role' | 'classSelector'
+  'classSelector'
 > & {
   classSelector?: string;
 };

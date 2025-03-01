@@ -9,16 +9,16 @@ describe('BProgress', () => {
     BProgress.configure({
       minimum: 0.08,
       maximum: 1,
-      template: `<div class="bar" role="bar"><div class="peg"></div></div>
-                 <div class="spinner" role="spinner"><div class="spinner-icon"></div></div>`,
+      template: `<div class="bar"><div class="peg"></div></div>
+                 <div class="spinner"><div class="spinner-icon"></div></div>`,
       easing: 'linear',
       positionUsing: '',
       speed: 200,
       trickle: true,
       trickleSpeed: 200,
       showSpinner: true,
-      barSelector: '[role="bar"]',
-      spinnerSelector: '[role="spinner"]',
+      barSelector: '.bar',
+      spinnerSelector: '.spinner',
       parent: 'body',
       direction: 'ltr',
     });
@@ -219,10 +219,10 @@ describe('BProgress', () => {
       const existing = document.createElement('div');
       existing.classList.add('bprogress');
       existing.innerHTML = `
-        <div class="bar" role="bar">
+        <div class="bar">
           <div class="peg"></div>
         </div>
-        <div class="spinner" role="spinner">
+        <div class="spinner">
           <div class="spinner-icon"></div>
         </div>
       `;
@@ -345,10 +345,10 @@ describe('BProgress', () => {
       progress.classList.add('bprogress');
       progress.style.display = 'none';
       progress.innerHTML = `
-        <div class="bar" role="bar">
+        <div class="bar">
           <div class="peg"></div>
         </div>
-        <div class="spinner" role="spinner">
+        <div class="spinner">
           <div class="spinner-icon"></div>
         </div>
       `;
@@ -367,10 +367,10 @@ describe('BProgress', () => {
       progress1.classList.add('bprogress');
       progress1.style.display = 'none';
       progress1.innerHTML = `
-        <div class="bar" role="bar">
+        <div class="bar">
           <div class="peg"></div>
         </div>
-        <div class="spinner" role="spinner">
+        <div class="spinner">
           <div class="spinner-icon"></div>
         </div>
       `;
@@ -378,10 +378,10 @@ describe('BProgress', () => {
       progress2.classList.add('bprogress');
       progress2.style.display = 'none';
       progress2.innerHTML = `
-        <div class="bar" role="bar">
+        <div class="bar">
           <div class="peg"></div>
         </div>
-        <div class="spinner" role="spinner">
+        <div class="spinner">
           <div class="spinner-icon"></div>
         </div>
       `;

@@ -13,16 +13,16 @@ export class BProgress {
     minimum: 0.08,
     maximum: 1,
     // If template is null, the user can insert their own template in the DOM.
-    template: `<div class="bar" role="bar"><div class="peg"></div></div>
-               <div class="spinner" role="spinner"><div class="spinner-icon"></div></div>`,
+    template: `<div class="bar"><div class="peg"></div></div>
+               <div class="spinner"><div class="spinner-icon"></div></div>`,
     easing: 'linear',
     positionUsing: '',
     speed: 200,
     trickle: true,
     trickleSpeed: 200,
     showSpinner: true,
-    barSelector: '[role="bar"]',
-    spinnerSelector: '[role="spinner"]',
+    barSelector: '.bar',
+    spinnerSelector: '.spinner',
     parent: 'body',
     direction: 'ltr',
   };
@@ -72,6 +72,7 @@ export class BProgress {
         const bar = progress.querySelector(
           this.settings.barSelector,
         ) as HTMLElement;
+        console.log('bar 1', bar);
         toCss(bar, this.barPositionCSS({ n, speed, ease }));
       });
 
@@ -242,6 +243,7 @@ export class BProgress {
       const bar = progress.querySelector(
         this.settings.barSelector,
       ) as HTMLElement;
+      console.log('bar 2', bar);
       const perc = fromStart
         ? toBarPerc(0, this.settings.direction)
         : toBarPerc(this.status || 0, this.settings.direction);

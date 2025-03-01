@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/react",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "type": "module",
   "description": "Utility to create your own progress bar with React",
   "repository": {
@@ -59,6 +59,6 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@bprogress/core": "^1.1.18"
+    "@bprogress/core": "^1.2.0"
   }
 }
