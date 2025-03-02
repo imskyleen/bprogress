@@ -1,5 +1,11 @@
 # @bprogress/next
 
+## 3.2.4
+
+### Patch Changes
+
+- chore: improve `package.json` description
+
 ## 3.2.3
 
 ### Patch Changes

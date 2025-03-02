@@ -1,5 +1,11 @@
 # @bprogress/react
 
+## 1.1.8
+
+### Patch Changes
+
+- chore: improve `package.json` description
+
 ## 1.1.7
 
 ### Patch Changes

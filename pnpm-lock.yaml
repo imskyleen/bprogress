@@ -477,8 +477,8 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3
       '@bprogress/react':
-        specifier: ^1.1.7
-        version: 1.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.1.8
+        version: 1.1.8(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@swc/core':
         specifier: ^1.10.16
@@ -584,8 +584,8 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3
       '@bprogress/react':
-        specifier: ^1.1.7
-        version: 1.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.1.8
+        version: 1.1.8(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@remix-run/react':
         specifier: ^2.15.3
@@ -1535,8 +1535,8 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@bprogress/react@1.1.7':
-    resolution: {integrity: sha512-Lt49F8TFdf3UdynnL4yDQ+8ZUL5wushTuQKJXGieTHIEEnwuioE1/5IqD2RnsEol+HurT6QBUG7xd+IS7Z0hyQ==}
+  '@bprogress/react@1.1.8':
+    resolution: {integrity: sha512-D2JOO45IWCnVxvIkCpNx2Qmrn7QtX3UIIaybOF763fezeD2YMDdk9zWx9Q6k+3XbJRbTo01n0coDDgBBNqDSaA==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -12755,7 +12755,7 @@ snapshots:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  '@bprogress/react@1.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@bprogress/react@1.1.8(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@bprogress/core': 1.2.3
       react: 19.0.0

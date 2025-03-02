@@ -1,8 +1,8 @@
 {
   "name": "@bprogress/vue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
-  "description": "Utility to create your own progress bar with Vue",
+  "description": "Utility to create your own NProgress bar like with Vue",
   "repository": {
     "type": "git",
     "url": "https://github.com/Skyleen77/bprogress/tree/main/packages/vue"
