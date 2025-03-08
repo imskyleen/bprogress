@@ -8,29 +8,43 @@ import {
   removeElement,
 } from './utils';
 
+const defaultSettings: Required<BProgressOptions> = {
+  minimum: 0.08,
+  maximum: 1,
+  // If template is null, the user can insert their own template in the DOM.
+  template: `<div class="bar"><div class="peg"></div></div>
+             <div class="spinner"><div class="spinner-icon"></div></div>
+             <div class="indeterminate"><div class="inc"></div><div class="dec"></div></div>`,
+  easing: 'linear',
+  positionUsing: '',
+  speed: 200,
+  trickle: true,
+  trickleSpeed: 200,
+  showSpinner: true,
+  barSelector: '.bar',
+  spinnerSelector: '.spinner',
+  parent: 'body',
+  direction: 'ltr',
+  indeterminate: false,
+  indeterminateSelector: '.indeterminate',
+};
+
 export class BProgress {
-  static settings: Required<BProgressOptions> = {
-    minimum: 0.08,
-    maximum: 1,
-    // If template is null, the user can insert their own template in the DOM.
-    template: `<div class="bar"><div class="peg"></div></div>
-               <div class="spinner"><div class="spinner-icon"></div></div>`,
-    easing: 'linear',
-    positionUsing: '',
-    speed: 200,
-    trickle: true,
-    trickleSpeed: 200,
-    showSpinner: true,
-    barSelector: '.bar',
-    spinnerSelector: '.spinner',
-    parent: 'body',
-    direction: 'ltr',
-  };
+  static settings: Required<BProgressOptions> = defaultSettings;
   static status: number | null = null;
 
   // Queue for animation functions
   private static pending: Array<(next: () => void) => void> = [];
   private static isPaused: boolean = false;
+
+  // Reset the progress
+  static reset(): typeof BProgress {
+    this.status = null;
+    this.isPaused = false;
+    this.pending = [];
+    this.settings = defaultSettings;
+    return this;
+  }
 
   // Configure BProgress with new options
   static configure(options: Partial<BProgressOptions>): typeof BProgress {
@@ -69,10 +83,13 @@ export class BProgress {
     this.queue((next: () => void) => {
       // Animate the bar on all progress elements
       progressElements.forEach((progress) => {
-        const bar = progress.querySelector(
-          this.settings.barSelector,
-        ) as HTMLElement;
-        toCss(bar, this.barPositionCSS({ n, speed, ease }));
+        if (!this.settings.indeterminate) {
+          // Animate the bar in determined mode
+          const bar = progress.querySelector(
+            this.settings.barSelector,
+          ) as HTMLElement;
+          toCss(bar, this.barPositionCSS({ n, speed, ease }));
+        }
       });
 
       if (n === this.settings.maximum) {
@@ -135,7 +152,7 @@ export class BProgress {
 
   // Increment the progress
   static inc(amount?: number): typeof BProgress {
-    if (this.isPaused) return this;
+    if (this.isPaused || this.settings.indeterminate) return this;
 
     let n = this.status;
 
@@ -164,7 +181,7 @@ export class BProgress {
 
   // Advance the progress (trickle)
   static trickle(): typeof BProgress {
-    if (this.isPaused) return this;
+    if (this.isPaused || this.settings.indeterminate) return this;
     return this.inc();
   }
 
@@ -202,6 +219,7 @@ export class BProgress {
    * Renders the BProgress component.
    * If a template is provided, it will create a progress element if none exists in the parent.
    * If the template is null, it relies on the user to insert their own elements marked with the "bprogress" class.
+   * When using indeterminate mode with a custom template, the template should include the indeterminate element.
    */
   static render(fromStart: boolean = false): HTMLElement[] {
     const parent =
@@ -239,22 +257,47 @@ export class BProgress {
       if (parent !== document.body) {
         addClass(parent as HTMLElement, 'bprogress-custom-parent');
       }
-      const bar = progress.querySelector(
-        this.settings.barSelector,
-      ) as HTMLElement;
-      const perc = fromStart
-        ? toBarPerc(0, this.settings.direction)
-        : toBarPerc(this.status || 0, this.settings.direction);
-      toCss(
-        bar,
-        this.barPositionCSS({
-          n: this.status || 0,
-          speed: this.settings.speed,
-          ease: this.settings.easing,
-          perc,
-        }),
-      );
 
+      if (!this.settings.indeterminate) {
+        // Determined mode: show the progress bar and hide the indeterminate element
+        const bar = progress.querySelector(
+          this.settings.barSelector,
+        ) as HTMLElement;
+        const perc = fromStart
+          ? toBarPerc(0, this.settings.direction)
+          : toBarPerc(this.status || 0, this.settings.direction);
+        toCss(
+          bar,
+          this.barPositionCSS({
+            n: this.status || 0,
+            speed: this.settings.speed,
+            ease: this.settings.easing,
+            perc,
+          }),
+        );
+        const indeterminateElem = progress.querySelector(
+          this.settings.indeterminateSelector,
+        ) as HTMLElement;
+        if (indeterminateElem) {
+          indeterminateElem.style.display = 'none';
+        }
+      } else {
+        // Indeterminate mode: hide the progress bar and show the indeterminate element
+        const bar = progress.querySelector(
+          this.settings.barSelector,
+        ) as HTMLElement;
+        if (bar) {
+          bar.style.display = 'none';
+        }
+        const indeterminateElem = progress.querySelector(
+          this.settings.indeterminateSelector,
+        ) as HTMLElement;
+        if (indeterminateElem) {
+          indeterminateElem.style.display = '';
+        }
+      }
+
+      // Spinner logic
       if (this.settings.template === null) {
         // For user-provided templates, toggle the spinner's visibility
         const spinner = progress.querySelector(
@@ -316,7 +359,7 @@ export class BProgress {
 
   // Pause the progress
   static pause(): typeof BProgress {
-    if (!this.isStarted()) return this;
+    if (!this.isStarted() || this.settings.indeterminate) return this;
     this.isPaused = true;
     return this;
   }
@@ -324,7 +367,7 @@ export class BProgress {
   // Resume the progress
   static resume(): typeof BProgress {
     // Return early if progress was never started
-    if (!this.isStarted()) return this;
+    if (!this.isStarted() || this.settings.indeterminate) return this;
 
     // Set isPaused to false to allow progress updates
     this.isPaused = false;

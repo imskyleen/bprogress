@@ -7,6 +7,7 @@
       type="text/css"
       href="../../packages/core/dist/index.css"
     />
+    <link rel="stylesheet" type="text/css" href="./index.css" />
     <title>BProgress Test</title>
   </head>
   <body>
@@ -26,6 +27,7 @@
     <button id="resume-btn">Resume</button>
     <button id="inc-btn">Increment</button>
     <button id="done-btn">Done</button>
+    <button id="toggle-indeterminate-btn">Toggle indeterminate</button>
 
     <script type="module">
       import { BProgress } from '../../packages/core/dist/index.js';
@@ -36,7 +38,16 @@
         // template: null,
         // positionUsing: 'width',
         // direction: 'rtl',
+        indeterminate: true,
       });
+
+      document
+        .getElementById('toggle-indeterminate-btn')
+        .addEventListener('click', function () {
+          BProgress.configure({
+            indeterminate: !BProgress.settings.indeterminate,
+          });
+        });
 
       document
         .getElementById('start-btn')

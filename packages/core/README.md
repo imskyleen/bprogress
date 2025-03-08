@@ -22,12 +22,14 @@ npm install @bprogress/core
 
 Use **unpkg**:
 
-- JS: https://unpkg.com/@bprogress/core/dist/index.js
+- JS: https://unpkg.com/@bprogress/core/dist/index.global.js
+- ESM: https://unpkg.com/@bprogress/core/dist/index.js
 - CSS: https://unpkg.com/@bprogress/core/dist/index.css
 
 Use **jsDelivr**:
 
-- JS: https://cdn.jsdelivr.net/npm/@bprogress/core/dist/index.js
+- JS: https://cdn.jsdelivr.net/npm/@bprogress/core/dist/index.global.js
+- ESM: https://cdn.jsdelivr.net/npm/@bprogress/core/dist/index.js
 - CSS: https://cdn.jsdelivr.net/npm/@bprogress/core/dist/index.css
 
 ### Integrations libraries
@@ -60,6 +62,19 @@ Import JavaScript in your `index.html` file.
 ```html
 <script type="module">
   import { BProgress } from 'https://unpkg.com/@bprogress/core/dist/index.js';
+
+  BProgress.configure({
+    ...
+  });
+</script>
+```
+
+Or you can add `BProgressJS` as a global variable using the legacy include:
+
+```html
+<script src="https://unpkg.com/@bprogress/core/dist/index.global.js"></script>
+<script>
+  const { BProgress } = BProgressJS;
 
   BProgress.configure({
     ...

@@ -18,8 +18,10 @@ export interface BProgressOptions {
   parent?: HTMLElement | string;
   positionUsing?: BProgressPositionUsing;
   barSelector?: string;
+  indeterminateSelector?: string;
   spinnerSelector?: string;
   direction?: BProgressDirection;
+  indeterminate?: boolean;
 }
 
 export type SpinnerPosition =

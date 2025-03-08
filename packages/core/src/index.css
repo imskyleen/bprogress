@@ -63,6 +63,7 @@
   animation: bprogress-spinner var(--bprogress-spinner-animation-duration) linear infinite;
 }
 
+/* Custom parent styles */
 .bprogress-custom-parent {
   overflow: hidden;
   position: relative;
@@ -73,12 +74,48 @@
   position: absolute;
 }
 
+/* Styles for indeterminate progress mode */
+.bprogress .indeterminate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--bprogress-height);
+  overflow: hidden;
+}
+
+.bprogress .indeterminate .inc,
+.bprogress .indeterminate .dec {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: var(--bprogress-color);
+}
+
+.bprogress .indeterminate .inc {
+  animation: bprogress-indeterminate-increase 2s infinite;
+}
+
+.bprogress .indeterminate .dec {
+  animation: bprogress-indeterminate-decrease 2s 0.5s infinite;
+}
+
 @-webkit-keyframes bprogress-spinner {
-  0%   { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0%   { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
 }
 
 @keyframes bprogress-spinner {
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@keyframes bprogress-indeterminate-increase {
+  from { left: -5%; width: 5%; }
+  to { left: 130%; width: 100%; }
+}
+
+@keyframes bprogress-indeterminate-decrease {
+  from { left: -80%; width: 80%; }
+  to { left: 110%; width: 10%; }
 }

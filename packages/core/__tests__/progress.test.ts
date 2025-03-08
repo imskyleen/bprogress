@@ -10,7 +10,8 @@ describe('BProgress', () => {
       minimum: 0.08,
       maximum: 1,
       template: `<div class="bar"><div class="peg"></div></div>
-                 <div class="spinner"><div class="spinner-icon"></div></div>`,
+                 <div class="spinner"><div class="spinner-icon"></div></div>
+                 <div class="indeterminate"><div class="inc"></div><div class="dec"></div></div>`,
       easing: 'linear',
       positionUsing: '',
       speed: 200,
@@ -21,6 +22,8 @@ describe('BProgress', () => {
       spinnerSelector: '.spinner',
       parent: 'body',
       direction: 'ltr',
+      indeterminate: false,
+      indeterminateSelector: '.indeterminate',
     });
   });
 
@@ -225,6 +228,10 @@ describe('BProgress', () => {
         <div class="spinner">
           <div class="spinner-icon"></div>
         </div>
+        <div class="indeterminate">
+          <div class="inc"></div>
+          <div class="dec"></div>
+        </div>
       `;
       document.body.appendChild(existing);
       const countBefore = document.querySelectorAll('.bprogress').length;
@@ -329,6 +336,157 @@ describe('BProgress', () => {
       };
       BProgress.promise(resolvedPromise);
       expect(document.querySelector('.bprogress')).toBeNull();
+    });
+  });
+
+  describe('Indeterminate mode', () => {
+    beforeEach(() => BProgress.reset());
+
+    test('should display indeterminate element and hide bar when indeterminate is true', () => {
+      BProgress.configure({ indeterminate: true });
+      BProgress.start();
+      const progress = document.querySelector('.bprogress');
+      const bar = progress?.querySelector('.bar') as HTMLElement;
+      const indeterminateElem = progress?.querySelector(
+        '.indeterminate',
+      ) as HTMLElement;
+      expect(bar?.style?.display).toBe('none');
+      expect(indeterminateElem?.style?.display).not.toBe('none');
+    });
+
+    test('should display bar and hide indeterminate element when indeterminate is false', () => {
+      BProgress.configure({ indeterminate: false });
+      BProgress.start();
+      const progress = document.querySelector('.bprogress');
+      const bar = progress?.querySelector('.bar') as HTMLElement;
+      const indeterminateElem = progress?.querySelector(
+        '.indeterminate',
+      ) as HTMLElement;
+
+      expect(bar?.style?.display).not.toBe('none');
+      expect(indeterminateElem?.style?.display).toBe('none');
+    });
+
+    test('inc method should not change display in indeterminate mode', () => {
+      // Configure BProgress in indeterminate mode and start it
+      BProgress.configure({ indeterminate: true });
+      BProgress.start();
+      const progress = document.querySelector('.bprogress');
+      const bar = progress?.querySelector('.bar') as HTMLElement;
+      const indeterminateElem = progress?.querySelector(
+        '.indeterminate',
+      ) as HTMLElement;
+
+      // Save initial display styles
+      const initialBarDisplay = bar?.style.display;
+      const initialIndeterminateDisplay = indeterminateElem?.style.display;
+
+      // Call inc method
+      BProgress.inc(0.1);
+
+      // Assert that the display styles remain unchanged
+      expect(bar?.style.display).toBe(initialBarDisplay);
+      expect(indeterminateElem?.style.display).toBe(
+        initialIndeterminateDisplay,
+      );
+    });
+
+    test('trickle method should not change display in indeterminate mode', () => {
+      // Configure BProgress in indeterminate mode and start it
+      BProgress.configure({ indeterminate: true });
+      BProgress.start();
+      const progress = document.querySelector('.bprogress');
+      const bar = progress?.querySelector('.bar') as HTMLElement;
+      const indeterminateElem = progress?.querySelector(
+        '.indeterminate',
+      ) as HTMLElement;
+
+      // Save initial display styles
+      const initialBarDisplay = bar?.style.display;
+      const initialIndeterminateDisplay = indeterminateElem?.style.display;
+
+      // Call trickle method
+      BProgress.trickle();
+
+      // Assert that the display styles remain unchanged
+      expect(bar?.style.display).toBe(initialBarDisplay);
+      expect(indeterminateElem?.style.display).toBe(
+        initialIndeterminateDisplay,
+      );
+    });
+
+    test('pause method should not change display in indeterminate mode', () => {
+      // Configure BProgress in indeterminate mode and start it
+      BProgress.configure({ indeterminate: true });
+      BProgress.start();
+      const progress = document.querySelector('.bprogress');
+      const bar = progress?.querySelector('.bar') as HTMLElement;
+      const indeterminateElem = progress?.querySelector(
+        '.indeterminate',
+      ) as HTMLElement;
+
+      // Save initial display styles
+      const initialBarDisplay = bar?.style.display;
+      const initialIndeterminateDisplay = indeterminateElem?.style.display;
+
+      // Call pause method
+      BProgress.pause();
+
+      // Assert that the display styles remain unchanged
+      expect(bar?.style.display).toBe(initialBarDisplay);
+      expect(indeterminateElem?.style.display).toBe(
+        initialIndeterminateDisplay,
+      );
+    });
+
+    test('resume method should not change display in indeterminate mode', () => {
+      // Configure BProgress in indeterminate mode and start it
+      BProgress.configure({ indeterminate: true });
+      BProgress.start();
+      // Pause then resume to check the resume method
+      BProgress.pause();
+      const progress = document.querySelector('.bprogress');
+      const bar = progress?.querySelector('.bar') as HTMLElement;
+      const indeterminateElem = progress?.querySelector(
+        '.indeterminate',
+      ) as HTMLElement;
+
+      // Save initial display styles
+      const initialBarDisplay = bar?.style.display;
+      const initialIndeterminateDisplay = indeterminateElem?.style.display;
+
+      // Call resume method
+      BProgress.resume();
+
+      // Assert that the display styles remain unchanged
+      expect(bar?.style.display).toBe(initialBarDisplay);
+      expect(indeterminateElem?.style.display).toBe(
+        initialIndeterminateDisplay,
+      );
+    });
+
+    test('set method should not change display in indeterminate mode', () => {
+      // Configure BProgress in indeterminate mode and start it
+      BProgress.configure({ indeterminate: true });
+      BProgress.start();
+      const progress = document.querySelector('.bprogress');
+      const bar = progress?.querySelector('.bar') as HTMLElement;
+      const indeterminateElem = progress?.querySelector(
+        '.indeterminate',
+      ) as HTMLElement;
+
+      // Save initial display styles
+      const initialBarDisplay = bar?.style.display;
+      const initialIndeterminateDisplay = indeterminateElem?.style.display;
+
+      // Call set method with an arbitrary value
+      BProgress.set(0.5);
+
+      // Assert that the display styles remain unchanged
+      expect(bar?.style.display).toBe(initialBarDisplay);
+      expect(indeterminateElem?.style.display).toBe(
+        initialIndeterminateDisplay,
+      );
     });
   });
 
