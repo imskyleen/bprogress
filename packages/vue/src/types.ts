@@ -113,3 +113,4 @@ export interface BarProps extends DefaultComponentWithSelectorProps {}
 export interface PegProps extends DefaultComponentWithSelectorProps {}
 export interface SpinnerProps extends DefaultComponentWithSelectorProps {}
 export interface SpinnerIconProps extends DefaultComponentWithSelectorProps {}
+export interface IndeterminateProps extends DefaultComponentWithSelectorProps {}
