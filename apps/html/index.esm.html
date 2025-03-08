@@ -26,6 +26,7 @@
     <button id="pause-btn">Pause</button>
     <button id="resume-btn">Resume</button>
     <button id="inc-btn">Increment</button>
+    <button id="dec-btn">Decrement</button>
     <button id="done-btn">Done</button>
     <button id="toggle-indeterminate-btn">Toggle indeterminate</button>
 
@@ -69,6 +70,10 @@
 
       document.getElementById('inc-btn').addEventListener('click', function () {
         BProgress.inc(0.2);
+      });
+
+      document.getElementById('dec-btn').addEventListener('click', function () {
+        BProgress.dec(0.2);
       });
 
       document

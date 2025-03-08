@@ -140,6 +140,32 @@ describe('BProgress', () => {
     });
   });
 
+  describe('dec', () => {
+    test('should not change progress if not already started', () => {
+      BProgress.status = null;
+      BProgress.dec(0.1);
+      expect(BProgress.status).toBeNull();
+    });
+
+    test('should decrement progress using provided amount', () => {
+      BProgress.status = 0.8;
+      const initial = BProgress.status;
+      BProgress.dec(0.1);
+      if (BProgress.status !== null) {
+        expect(BProgress.status).toBeLessThan(initial!);
+      }
+    });
+
+    test('should use default decrement value when amount is undefined', () => {
+      BProgress.status = 0.9;
+      const prevStatus = BProgress.status;
+      BProgress.dec();
+      if (BProgress.status !== null) {
+        expect(BProgress.status).toBeLessThan(prevStatus);
+      }
+    });
+  });
+
   describe('done', () => {
     test('should complete and remove the progress bar', (done) => {
       BProgress.start();
@@ -383,6 +409,30 @@ describe('BProgress', () => {
 
       // Call inc method
       BProgress.inc(0.1);
+
+      // Assert that the display styles remain unchanged
+      expect(bar?.style.display).toBe(initialBarDisplay);
+      expect(indeterminateElem?.style.display).toBe(
+        initialIndeterminateDisplay,
+      );
+    });
+
+    test('dec method should not change display in indeterminate mode', () => {
+      // Configure BProgress in indeterminate mode and start it
+      BProgress.configure({ indeterminate: true });
+      BProgress.start();
+      const progress = document.querySelector('.bprogress');
+      const bar = progress?.querySelector('.bar') as HTMLElement;
+      const indeterminateElem = progress?.querySelector(
+        '.indeterminate',
+      ) as HTMLElement;
+
+      // Save initial display styles
+      const initialBarDisplay = bar?.style.display;
+      const initialIndeterminateDisplay = indeterminateElem?.style.display;
+
+      // Call inc method
+      BProgress.dec(0.1);
 
       // Assert that the display styles remain unchanged
       expect(bar?.style.display).toBe(initialBarDisplay);

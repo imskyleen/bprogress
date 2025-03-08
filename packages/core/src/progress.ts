@@ -179,6 +179,29 @@ export class BProgress {
     }
   }
 
+  // Decrement the progress
+  static dec(amount?: number): typeof BProgress {
+    if (this.isPaused || this.settings.indeterminate) return this;
+
+    let n = this.status;
+
+    if (typeof n !== 'number') return this;
+    if (typeof amount !== 'number') {
+      if (n > 0.8) {
+        amount = 0.1;
+      } else if (n > 0.5) {
+        amount = 0.05;
+      } else if (n > 0.2) {
+        amount = 0.02;
+      } else {
+        amount = 0.01;
+      }
+    }
+
+    n = clamp(n - amount, 0, 0.994);
+    return this.set(n);
+  }
+
   // Advance the progress (trickle)
   static trickle(): typeof BProgress {
     if (this.isPaused || this.settings.indeterminate) return this;
