@@ -5,6 +5,7 @@
 ### Minor Changes
 
 - feat: add `dec` method to `ProgressProvider`
+- feat: add `Indeterminate` component
 - chore: upgrade to `@bprogress/core@1.3.0`
 
 ## 1.1.8

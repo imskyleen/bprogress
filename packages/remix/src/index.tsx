@@ -6,6 +6,7 @@ export {
   Peg,
   Spinner,
   SpinnerIcon,
+  Indeterminate,
 } from '@bprogress/react';
 export * from './hooks/use-navigate';
 export type {
@@ -17,6 +18,7 @@ export type {
   PegProps,
   SpinnerProps,
   SpinnerIconProps,
+  IndeterminateProps,
 } from '@bprogress/react';
 export type * from './types';
 export type { BProgressOptions } from '@bprogress/core';

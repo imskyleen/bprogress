@@ -1,5 +1,12 @@
 {
   "title": "Progress Components",
   "root": false,
-  "pages": ["progress", "bar", "peg", "spinner", "spinner-icon"]
+  "pages": [
+    "progress",
+    "bar",
+    "peg",
+    "spinner",
+    "spinner-icon",
+    "indeterminate"
+  ]
 }

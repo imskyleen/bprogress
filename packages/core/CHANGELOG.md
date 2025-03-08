@@ -5,7 +5,7 @@
 ### Minor Changes
 
 - feat: add indeterminate mode
-- feat: add `dec` method
+- feat: add `dec` and `reset` methods
 
 ## 1.2.4
 

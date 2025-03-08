@@ -14,13 +14,16 @@ BProgress.configure({
   minimum: 0.08,
   maximum: 1,
   template: `<div class="bar"><div class="peg"></div></div>
-              <div class="spinner"><div class="spinner-icon"></div></div>`,
+             <div class="spinner"><div class="spinner-icon"></div></div>
+             <div class="indeterminate"><div class="inc"></div><div class="dec"></div></div>`,
   easing: 'linear',
   positionUsing: 'width',
   speed: 200,
   trickle: true,
   trickleSpeed: 200,
   showSpinner: true,
+  indeterminate: false,
+  indeterminateSelector: '.indeterminate',
   barSelector: '.bar',
   spinnerSelector: '.spinner',
   parent: 'body',
@@ -49,8 +52,10 @@ interface BProgressOptions {
   parent?: HTMLElement | string;
   positionUsing?: BProgressPositionUsing;
   barSelector?: string;
+  indeterminateSelector?: string;
   spinnerSelector?: string;
   direction?: BProgressDirection;
+  indeterminate?: boolean;
 }
 ```
 
@@ -88,6 +93,8 @@ type BProgressDirection = 'ltr' | 'rtl';
 | spinnerSelector | string          | '.spinner'                 | The spinner selector.                         |
 | parent   | HTMLElement \| string  | 'body'                             | The parent container of the progress bar. (if `template` is not `null`) |
 | direction | BProgressDirection    | 'ltr'                              | The direction of the progress bar.            |
+| indeterminate | boolean            | false                              | If `true`, the progress bar will be indeterminate. |
+| indeterminateSelector | string    | '.indeterminate'                   | The indeterminate selector.                   |
 
 ## Advanced Usage
 
@@ -103,6 +110,10 @@ type BProgressDirection = 'ltr' | 'rtl';
   <div class="spinner">
     <div class="spinner-icon"></div>
   </div>
+  <div class="indeterminate">
+    <div class="inc"></div>
+    <div class="dec"></div>
+  </div>
 </div>
 ```
 
@@ -111,4 +122,18 @@ It's very important to have a `div` with the `bprogress` class and the `display:
 <Callout type="warn" title="Warning">
   When using a custom component for the progress bar, the component will not be dynamically added or removed from the DOM. Instead, it will simply toggle between `display: block` and `display: none`.  
   This behavior may impact performance, especially if the component involves complex rendering or layout calculations.
+</Callout>
+
+### Use `indeterminate: true`
+
+The `indeterminate` option set the progress bar to an indeterminate state. This is useful when the progress is unknown or indeterminate.
+
+```ts
+BProgress.configure({
+  indeterminate: true,
+});
+```
+
+<Callout type="warn" title="Warning">
+  When `indeterminate` is set to `true`, the progress bar will be indeterminate, and the `inc()`, `dec()`, `trickle()`, `pause()`, `resume()` and `set()` methods will not work.
 </Callout>

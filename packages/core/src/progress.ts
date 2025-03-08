@@ -21,12 +21,12 @@ const defaultSettings: Required<BProgressOptions> = {
   trickle: true,
   trickleSpeed: 200,
   showSpinner: true,
+  indeterminate: false,
+  indeterminateSelector: '.indeterminate',
   barSelector: '.bar',
   spinnerSelector: '.spinner',
   parent: 'body',
   direction: 'ltr',
-  indeterminate: false,
-  indeterminateSelector: '.indeterminate',
 };
 
 export class BProgress {

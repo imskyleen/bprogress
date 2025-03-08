@@ -18,7 +18,7 @@ import { useProgress } from '@bprogress/...';
 ## Usage
 
 ```tsx
-const { start, stop, inc, set, pause, resume, setOptions, getOptions } = useProgress();
+const { start, stop, inc, dec, set, pause, resume, setOptions, getOptions } = useProgress();
 ```
 
 ## Methods
@@ -49,6 +49,14 @@ Increase the progress bar (between 0 and 1).
 
 ```tsx
 inc(0.1);
+```
+
+### dec
+
+Decrease the progress bar (between 0 and 1).
+
+```tsx
+dec(0.1);
 ```
 
 ### set
@@ -100,6 +108,7 @@ interface ProgressContextValue {
   start: (startPosition?: number, delay?: number) => void;
   stop: (stopDelay?: number, forcedStopDelay?: number) => void;
   inc: (amount?: number) => void;
+  dec: (amount?: number) => void;
   set: (n: number) => void;
   pause: () => void;
   resume: () => void;

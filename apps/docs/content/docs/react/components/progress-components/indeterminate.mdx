@@ -1,0 +1,36 @@
+---
+title: Indeterminate
+description: Use the `Indeterminate` component
+---
+
+The `Indeterminate` component must be used inside the `Progress` component.
+
+## Import
+
+```tsx
+import { Indeterminate } from '@bprogress/...';
+```
+
+<Callout title="Note">
+  Replace the `...` in the import with the library you're using. For example, if you use `@bprogress/next`, import by doing `from '@bprogress/next'`
+</Callout>
+
+## Usage
+
+The `Indeterminate` component is used to create the indeterminate progress bar element.
+
+```tsx
+<Indeterminate />
+```
+
+<Callout type="info">
+  It's only useful if you use the BProgress `indeterminate` option.
+</Callout>
+
+## Props
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| as | `React.ElementType` | `'div'` | The component to render the progress element |
+| classSelector | `string` | `'indeterminate'` | The class selector of the progress element (depends on your css) |
+| ...rest | `React.ComponentPropsWithoutRef<T>` | - | The rest of the props are passed to the progress element |
