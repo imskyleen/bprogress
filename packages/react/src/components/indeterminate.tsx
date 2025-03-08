@@ -3,7 +3,7 @@ import type { ProgressComponentProps } from '../types';
 import { classNames } from '../utils/classnames';
 
 export type IndeterminateProps<T extends React.ElementType = 'div'> =
-  ProgressComponentProps<T>;
+  ProgressComponentProps<T> & { children?: never };
 
 function IndeterminateInner<T extends React.ElementType = 'div'>(
   {
