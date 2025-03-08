@@ -8,6 +8,7 @@ jest.mock('@bprogress/core', () => ({
     start: jest.fn(),
     done: jest.fn(),
     inc: jest.fn(),
+    dec: jest.fn(),
     set: jest.fn(),
     pause: jest.fn(),
     resume: jest.fn(),
@@ -34,6 +35,7 @@ const TestComponent = defineComponent({
       <button data-testid="start" @click="start(50, 100)">Start</button>
       <button data-testid="stop" @click="stop(200, 100)">Stop</button>
       <button data-testid="inc" @click="inc(0.1)">Inc</button>
+      <button data-testid="dec" @click="dec(0.1)">Dec</button>
       <button data-testid="set" @click="set(0.5)">Set</button>
       <button data-testid="pause" @click="pause()">Pause</button>
       <button data-testid="resume" @click="resume()">Resume</button>
@@ -42,9 +44,28 @@ const TestComponent = defineComponent({
     </div>
   `,
   setup() {
-    const { start, stop, inc, set, pause, resume, setOptions, getOptions } =
-      useProgress();
-    return { start, stop, inc, set, pause, resume, setOptions, getOptions };
+    const {
+      start,
+      stop,
+      inc,
+      dec,
+      set,
+      pause,
+      resume,
+      setOptions,
+      getOptions,
+    } = useProgress();
+    return {
+      start,
+      stop,
+      inc,
+      dec,
+      set,
+      pause,
+      resume,
+      setOptions,
+      getOptions,
+    };
   },
 });
 
@@ -111,6 +132,16 @@ describe('ProgressProvider.vue', () => {
     const incButton = getByTestId('inc');
     await fireEvent.click(incButton);
     expect(BProgress.inc).toHaveBeenCalledWith(0.1);
+  });
+
+  test('calls BProgress.dec when dec is invoked', async () => {
+    const { getByTestId } = render(ProgressProvider, {
+      slots: { default: TestComponent },
+    });
+
+    const decButton = getByTestId('dec');
+    await fireEvent.click(decButton);
+    expect(BProgress.dec).toHaveBeenCalledWith(0.1);
   });
 
   test('calls BProgress.set when set is invoked', async () => {

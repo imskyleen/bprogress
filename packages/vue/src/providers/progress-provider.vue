@@ -53,6 +53,7 @@ const stop = (stopDelay: number = 0, forcedStopDelay: number = 0) => {
 };
 
 const inc = (amount?: number) => BProgress.inc(amount);
+const dec = (amount?: number) => BProgress.dec(amount);
 const set = (n: number) => BProgress.set(n);
 const pause = () => BProgress.pause();
 const resume = () => BProgress.resume();
@@ -73,6 +74,7 @@ const contextValue: ProgressContextValue = {
   start,
   stop,
   inc,
+  dec,
   set,
   pause,
   resume,
