@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+- chore: upgrade to `@bprogress/core@1.3.1` and `@bprogress/react@1.2.1`
+
+## 3.2.5
+
+### Patch Changes
+
 - chore: upgrade to `@bprogress/core@1.3.0` and `@bprogress/react@1.2.0`
 
 ## 3.2.4

@@ -1,5 +1,11 @@
 # @bprogress/vue
 
+## 1.1.1
+
+### Patch Changes
+
+- chore: upgrade to `@bprogress/core@1.3.1`
+
 ## 1.1.0
 
 ### Minor Changes
