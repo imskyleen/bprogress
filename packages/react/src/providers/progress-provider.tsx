@@ -45,6 +45,8 @@ export const ProgressProvider = ({
 
   const inc = useCallback((amount?: number) => BProgress.inc(amount), []);
 
+  const dec = useCallback((amount?: number) => BProgress.dec(amount), []);
+
   const set = useCallback((n: number) => BProgress.set(n), []);
 
   const pause = useCallback(() => BProgress.pause(), []);
@@ -88,7 +90,17 @@ export const ProgressProvider = ({
 
   return (
     <ProgressContext.Provider
-      value={{ start, stop, inc, set, pause, resume, setOptions, getOptions }}
+      value={{
+        start,
+        stop,
+        inc,
+        dec,
+        set,
+        pause,
+        resume,
+        setOptions,
+        getOptions,
+      }}
     >
       {!disableStyle ? styles : null}
       {children}

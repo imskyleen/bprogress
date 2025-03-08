@@ -1,5 +1,12 @@
 # @bprogress/react
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: add `dec` method to `ProgressProvider`
+- chore: upgrade to `@bprogress/core@1.3.0`
+
 ## 1.1.8
 
 ### Patch Changes

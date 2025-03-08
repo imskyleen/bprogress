@@ -4,6 +4,7 @@ import type { BProgressOptions, SpinnerPosition } from '@bprogress/core';
  * @param start Start the progress bar
  * @param done Stop the progress bar
  * @param inc Increase the progress Bar
+ * @param dec Decrease the progress bar
  * @param set Set the progress bar to a specific value
  * @param pause Pause the progress bar
  * @param resume Resume the progress bar
@@ -14,6 +15,7 @@ export interface ProgressContextValue {
   start: (startPosition?: number, delay?: number) => void;
   stop: (stopDelay?: number, forcedStopDelay?: number) => void;
   inc: (amount?: number) => void;
+  dec: (amount?: number) => void;
   set: (n: number) => void;
   pause: () => void;
   resume: () => void;

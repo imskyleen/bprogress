@@ -33,6 +33,8 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "pub:release": "pnpm publish --no-git-checks --access public",
+    "pub:canary": "pnpm publish --no-git-checks --tag canary --access public",
+    "pub:beta": "pnpm publish --no-git-checks --tag beta --access public",
     "prepublishOnly": "pnpm lint && pnpm build"
   },
   "keywords": [
@@ -71,7 +73,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@bprogress/core": "^1.2.3",
+    "@bprogress/core": "^1.3.0",
     "@bprogress/react": "^1.1.8"
   }
 }

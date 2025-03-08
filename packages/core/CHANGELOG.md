@@ -1,5 +1,12 @@
 # @bprogress/core
 
+## 1.3.0
+
+### Minor Changes
+
+- feat: add indeterminate mode
+- feat: add `dec` method
+
 ## 1.2.4
 
 ### Patch Changes

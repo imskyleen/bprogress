@@ -12,6 +12,7 @@ jest.mock('@bprogress/core', () => ({
     start: jest.fn(),
     done: jest.fn(),
     inc: jest.fn(),
+    dec: jest.fn(),
     set: jest.fn(),
     pause: jest.fn(),
     resume: jest.fn(),
@@ -43,14 +44,24 @@ describe('ProgressProvider', () => {
   });
 
   const TestComponent = () => {
-    const { start, stop, inc, set, pause, resume, setOptions, getOptions } =
-      useProgress();
+    const {
+      start,
+      stop,
+      inc,
+      dec,
+      set,
+      pause,
+      resume,
+      setOptions,
+      getOptions,
+    } = useProgress();
 
     return (
       <div>
         <button onClick={() => start(50, 100)}>Start</button>
         <button onClick={() => stop(200, 100)}>Stop</button>
         <button onClick={() => inc(0.1)}>Inc</button>
+        <button onClick={() => dec(0.1)}>Dec</button>
         <button onClick={() => set(0.5)}>Set</button>
         <button onClick={pause}>Pause</button>
         <button onClick={resume}>Resume</button>
@@ -135,6 +146,20 @@ describe('ProgressProvider', () => {
     });
 
     expect(BProgress.inc).toHaveBeenCalledWith(0.1);
+  });
+
+  it('calls BProgress.dec when dec is invoked', () => {
+    const { getByText } = render(
+      <ProgressProvider>
+        <TestComponent />
+      </ProgressProvider>,
+    );
+
+    act(() => {
+      getByText('Dec').click();
+    });
+
+    expect(BProgress.dec).toHaveBeenCalledWith(0.1);
   });
 
   it('calls BProgress.set when set is invoked', () => {
