@@ -1,5 +1,11 @@
 # @bprogress/core
 
+## 1.3.2
+
+### Patch Changes
+
+- fix: force `height` and `width` to `0` in `bprogress` class
+
 ## 1.3.1
 
 ### Patch Changes

@@ -42,6 +42,8 @@ export const css = ({
 }
 
 .bprogress {
+  width: 0;
+  height: 0;
   pointer-events: none;
   z-index: var(--bprogress-z-index);
 }

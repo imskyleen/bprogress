@@ -474,11 +474,11 @@ importers:
   packages/next:
     dependencies:
       '@bprogress/core':
-        specifier: ^1.3.1
-        version: 1.3.1
+        specifier: ^1.3.2
+        version: 1.3.2
       '@bprogress/react':
-        specifier: ^1.2.2
-        version: 1.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.2.3
+        version: 1.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@swc/core':
         specifier: ^1.10.16
@@ -523,8 +523,8 @@ importers:
   packages/react:
     dependencies:
       '@bprogress/core':
-        specifier: ^1.3.1
-        version: 1.3.1
+        specifier: ^1.3.2
+        version: 1.3.2
     devDependencies:
       '@swc/core':
         specifier: ^1.10.16
@@ -581,11 +581,11 @@ importers:
   packages/remix:
     dependencies:
       '@bprogress/core':
-        specifier: ^1.3.1
-        version: 1.3.1
+        specifier: ^1.3.2
+        version: 1.3.2
       '@bprogress/react':
-        specifier: ^1.2.2
-        version: 1.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.2.3
+        version: 1.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@remix-run/react':
         specifier: ^2.15.3
@@ -711,8 +711,8 @@ importers:
   packages/vue:
     dependencies:
       '@bprogress/core':
-        specifier: ^1.3.1
-        version: 1.3.1
+        specifier: ^1.3.2
+        version: 1.3.2
     devDependencies:
       '@babel/preset-env':
         specifier: ^7.26.9
@@ -1519,8 +1519,8 @@ packages:
   '@bprogress/core@1.2.0':
     resolution: {integrity: sha512-ObeFzjpPSV0RZpOwGPQVLCK0eYVAwQVKtrdUaP93VcbChhZ0i0X7CLmPKbBjx89wDQ0UItxjnm94RJ69dObeiw==}
 
-  '@bprogress/core@1.3.1':
-    resolution: {integrity: sha512-i7hJN8IyyY3by47VpLH8p/R4u/YrNkwQ8GwvrdMSPW0yj6SqRh1Bb9HCLw7iKeR6VMM4zziSGM+Oxuudgf35pQ==}
+  '@bprogress/core@1.3.2':
+    resolution: {integrity: sha512-dpiI7Oy2PRsZN5oMIZs9Ha9weyLs66IInGLlfEPdOrMNR7nsjelWtFduOAsj51w7kU1JY+ATUtO9xN/5iO2nMg==}
 
   '@bprogress/next@3.1.2':
     resolution: {integrity: sha512-wsrmGjJIrjqMJuWqyeq/NUphELcY5jaAR8gtcuo4pK9Ph29FItMvtJm8Iea/aOHVOn5pAz8xeRL9aGHHLyHkEw==}
@@ -1535,8 +1535,8 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@bprogress/react@1.2.2':
-    resolution: {integrity: sha512-Q0TLu7BpUK6iWyJWtPebaGvGN5dyenYRhoT9dsEsEoRBG/tV11F+yYFmL6hCEpJARxK3pK9nS2tsodhXwf6C1w==}
+  '@bprogress/react@1.2.3':
+    resolution: {integrity: sha512-xQS1CmbGjfb1engxe9mWB2JhDdTVbrdNF9DVha5gz1atQ8RCoE2z3HENyh1a0ca0GZf7BkFUcAtJIW28bGv5gQ==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -12739,7 +12739,7 @@ snapshots:
 
   '@bprogress/core@1.2.0': {}
 
-  '@bprogress/core@1.3.1': {}
+  '@bprogress/core@1.3.2': {}
 
   '@bprogress/next@3.1.2(next@15.0.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
@@ -12751,13 +12751,13 @@ snapshots:
 
   '@bprogress/react@1.1.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@bprogress/core': 1.3.1
+      '@bprogress/core': 1.3.2
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  '@bprogress/react@1.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@bprogress/react@1.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@bprogress/core': 1.3.1
+      '@bprogress/core': 1.3.2
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
