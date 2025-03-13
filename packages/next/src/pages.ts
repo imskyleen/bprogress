@@ -1,1 +1,1 @@
-export { PagesProgressProvider as ProgressProvider } from './providers/pages-progress-provider';
+export { PagesProgressProvider as ProgressProvider } from "./providers/pages-progress-provider";

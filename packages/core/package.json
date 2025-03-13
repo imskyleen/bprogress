@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/core",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "type": "module",
   "description": "NProgress-inspired library with more features",
   "repository": {
@@ -19,15 +19,14 @@
     "bar",
     "bprogress"
   ],
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.js",
-      "default": "./dist/index.js"
+      "require": "./dist/index.cjs"
     },
     "./css": "./dist/index.css"
   },

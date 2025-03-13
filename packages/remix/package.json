@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/remix",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "NProgress bar like for Remix",
   "type": "module",
   "repository": {
@@ -11,7 +11,7 @@
     "url": "https://github.com/Skyleen77/bprogress/issues"
   },
   "homepage": "https://bprogress.vercel.app/docs/remix/installation",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -60,7 +60,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@bprogress/core": "^1.3.2",
-    "@bprogress/react": "^1.2.3"
+    "@bprogress/core": "^1.3.3",
+    "@bprogress/react": "^1.2.4"
   }
 }

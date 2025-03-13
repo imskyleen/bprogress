@@ -1,5 +1,12 @@
 # @bprogress/react
 
+## 1.2.4
+
+### Patch Changes
+
+- chore: add `.cjs` build
+- chore: upgrade to `@bprogress/core@1.3.3`
+
 ## 1.2.3
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @bprogress/next
 
+## 3.2.9
+
+### Patch Changes
+
+- chore: add `.cjs` build
+- chore: upgrade to `@bprogress/core@1.3.3` and `@bprogress/react@1.2.4`
+
 ## 3.2.8
 
 ### Patch Changes

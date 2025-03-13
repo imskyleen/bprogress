@@ -1,16 +1,18 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ['src/index.ts', 'src/app.ts', 'src/pages.ts'],
+  entry: ["src/index.ts", "src/app.ts", "src/pages.ts"],
   sourcemap: true,
   clean: true,
   dts: true,
-  format: ['esm'],
+  splitting: false,
+  format: ["esm", "cjs"],
   external: [
-    'react',
-    'react-dom',
-    'next/router',
-    'next/navigation',
-    '@bprogress/core',
+    "react",
+    "react-dom",
+    "next/router",
+    "next/navigation",
+    "@bprogress/react",
+    "@bprogress/core",
   ],
 });

@@ -1,6 +1,6 @@
-export { useRouter } from './hooks/use-router';
-export { AppProgressProvider } from './providers/app-progress-provider';
-export { PagesProgressProvider } from './providers/pages-progress-provider';
+export { useRouter } from "./hooks/use-router";
+export { AppProgressProvider } from "./providers/app-progress-provider";
+export { PagesProgressProvider } from "./providers/pages-progress-provider";
 export {
   useProgress,
   Progress,
@@ -9,7 +9,7 @@ export {
   Spinner,
   SpinnerIcon,
   Indeterminate,
-} from '@bprogress/react';
+} from "@bprogress/react";
 export type {
   SpinnerPosition,
   ProgressContextValue,
@@ -20,6 +20,6 @@ export type {
   SpinnerProps,
   SpinnerIconProps,
   IndeterminateProps,
-} from '@bprogress/react';
-export type * from './types';
-export type { BProgressOptions } from '@bprogress/core';
+} from "@bprogress/react";
+export type * from "./types";
+export type { BProgressOptions } from "@bprogress/core";

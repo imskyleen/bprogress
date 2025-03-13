@@ -1,5 +1,12 @@
 # @bprogress/remix
 
+## 1.0.16
+
+### Patch Changes
+
+- chore: add `.cjs` build
+- chore: upgrade to `@bprogress/core@1.3.3` and `@bprogress/react@1.2.4`
+
 ## 1.0.15
 
 ### Patch Changes
