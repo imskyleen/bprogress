@@ -1,5 +1,5 @@
 import type { BProgressOptions, SpinnerPosition } from '@bprogress/core';
-import type { Component, CSSProperties } from 'vue';
+import type { Component, CSSProperties, Ref } from 'vue';
 
 /**
  * @param start Start the progress bar
@@ -13,7 +13,11 @@ import type { Component, CSSProperties } from 'vue';
  * @param getOptions Get the BProgress options
  */
 export interface ProgressContextValue {
-  start: (startPosition?: number, delay?: number) => void;
+  start: (
+    startPosition?: number,
+    delay?: number,
+    autoStopDisabled?: boolean,
+  ) => void;
   stop: (stopDelay?: number, forcedStopDelay?: number) => void;
   inc: (amount?: number) => void;
   dec: (amount?: number) => void;
@@ -26,6 +30,9 @@ export interface ProgressContextValue {
       | Partial<BProgressOptions>
       | ((prevOptions: BProgressOptions) => Partial<BProgressOptions>),
   ) => void;
+  isAutoStopDisabled: Ref<boolean>;
+  disableAutoStop: () => void;
+  enableAutoStop: () => void;
 }
 
 /**

@@ -35,7 +35,18 @@ if (options.value) BProgress.configure(options.value || {});
 
 const timer = ref<ReturnType<typeof setTimeout> | null>(null);
 
-const start = (startPosition: number = 0, delay: number = 0) => {
+const isAutoStopDisabled = ref(false);
+
+const disableAutoStop = () => (isAutoStopDisabled.value = true);
+
+const enableAutoStop = () => (isAutoStopDisabled.value = false);
+
+const start = (
+  startPosition: number = 0,
+  delay: number = 0,
+  autoStopDisabled: boolean = false,
+) => {
+  if (autoStopDisabled) disableAutoStop();
   timer.value = setTimeout(() => {
     if (startPosition > 0) BProgress.set(startPosition);
     BProgress.start();
@@ -48,6 +59,7 @@ const stop = (stopDelay: number = 0, forcedStopDelay: number = 0) => {
     timer.value = setTimeout(() => {
       if (!BProgress.isStarted()) return;
       BProgress.done();
+      if (isAutoStopDisabled.value) enableAutoStop();
     }, stopDelay);
   }, forcedStopDelay);
 };
@@ -80,6 +92,9 @@ const contextValue: ProgressContextValue = {
   resume,
   getOptions,
   setOptions,
+  isAutoStopDisabled,
+  disableAutoStop,
+  enableAutoStop,
 };
 provide(progressSymbol, contextValue);
 

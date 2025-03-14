@@ -1,5 +1,11 @@
 import { BProgress, css, type BProgressOptions } from '@bprogress/core';
-import React, { createContext, useCallback, useContext, useMemo } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+} from 'react';
 import type { ProgressProviderProps, ProgressContextValue } from '../types';
 
 const ProgressContext = createContext<ProgressContextValue | undefined>(
@@ -24,24 +30,41 @@ export const ProgressProvider = ({
   disableStyle = false,
   nonce,
 }: ProgressProviderProps) => {
-  const timer = React.useRef<NodeJS.Timeout | null>(null);
+  const timer = useRef<NodeJS.Timeout | null>(null);
+  const isAutoStopDisabled = useRef(false);
 
-  const start = useCallback((startPosition = 0, delay = 0) => {
-    timer.current = setTimeout(() => {
-      if (startPosition > 0) BProgress.set(startPosition);
-      BProgress.start();
-    }, delay);
-  }, []);
-
-  const stop = useCallback((stopDelay = 0, forcedStopDelay = 0) => {
-    setTimeout(() => {
-      if (timer.current) clearTimeout(timer.current);
+  const disableAutoStop = useCallback(
+    () => (isAutoStopDisabled.current = true),
+    [],
+  );
+  const enableAutoStop = useCallback(
+    () => (isAutoStopDisabled.current = false),
+    [],
+  );
+  const start = useCallback(
+    (startPosition = 0, delay = 0, autoStopDisabled = false) => {
+      if (autoStopDisabled) disableAutoStop();
       timer.current = setTimeout(() => {
-        if (!BProgress.isStarted()) return;
-        BProgress.done();
-      }, stopDelay);
-    }, forcedStopDelay);
-  }, []);
+        if (startPosition > 0) BProgress.set(startPosition);
+        BProgress.start();
+      }, delay);
+    },
+    [disableAutoStop],
+  );
+
+  const stop = useCallback(
+    (stopDelay = 0, forcedStopDelay = 0) => {
+      setTimeout(() => {
+        if (timer.current) clearTimeout(timer.current);
+        timer.current = setTimeout(() => {
+          if (!BProgress.isStarted()) return;
+          BProgress.done();
+          if (isAutoStopDisabled.current) enableAutoStop();
+        }, stopDelay);
+      }, forcedStopDelay);
+    },
+    [enableAutoStop],
+  );
 
   const inc = useCallback((amount?: number) => BProgress.inc(amount), []);
 
@@ -100,6 +123,9 @@ export const ProgressProvider = ({
         resume,
         setOptions,
         getOptions,
+        isAutoStopDisabled,
+        disableAutoStop,
+        enableAutoStop,
       }}
     >
       {!disableStyle ? styles : null}

@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/react",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "type": "module",
   "description": "Utility to create your own NProgress bar like with React",
   "repository": {

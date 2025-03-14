@@ -12,7 +12,11 @@ import type { BProgressOptions, SpinnerPosition } from '@bprogress/core';
  * @param getOptions Get the BProgress options
  */
 export interface ProgressContextValue {
-  start: (startPosition?: number, delay?: number) => void;
+  start: (
+    startPosition?: number,
+    delay?: number,
+    autoStopDisabled?: boolean,
+  ) => void;
   stop: (stopDelay?: number, forcedStopDelay?: number) => void;
   inc: (amount?: number) => void;
   dec: (amount?: number) => void;
@@ -25,6 +29,9 @@ export interface ProgressContextValue {
       | ((prevOptions: BProgressOptions) => Partial<BProgressOptions>),
   ) => void;
   getOptions: () => BProgressOptions;
+  isAutoStopDisabled: React.RefObject<boolean>;
+  disableAutoStop: () => void;
+  enableAutoStop: () => void;
 }
 
 /**

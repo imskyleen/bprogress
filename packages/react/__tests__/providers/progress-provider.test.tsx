@@ -29,6 +29,11 @@ jest.mock('@bprogress/core', () => ({
       positionUsing: 'translate3d',
       direction: 'ltr',
     } as Required<BProgressOptions>,
+    isAutoStopDisabled: jest.fn(() => ({
+      current: false,
+    })),
+    disableAutoStop: jest.fn(),
+    enableAutoStop: jest.fn(),
   },
   css: jest.fn(() => 'mocked-css { color: red; }'),
 }));

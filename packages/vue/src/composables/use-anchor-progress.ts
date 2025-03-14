@@ -34,7 +34,7 @@ export function useAnchorProgress(
     [],
   );
   const timerRef = ref<number | null>(null);
-  const { start, stop } = useProgress();
+  const { start, stop, isAutoStopDisabled } = useProgress();
 
   // Save the original pushState method
   const originalWindowHistoryPushState = window.history.pushState;
@@ -53,7 +53,7 @@ export function useAnchorProgress(
         clearTimeout(timerRef.value);
       }
       timerRef.value = window.setTimeout(() => {
-        stop();
+        if (!isAutoStopDisabled.value) stop();
       }, stopDelay);
     });
   }
@@ -159,7 +159,7 @@ export function useAnchorProgress(
     // Override window.history.pushState using a proxy to intercept state changes
     window.history.pushState = new Proxy(window.history.pushState, {
       apply(target, thisArg, argArray: PushStateInput) {
-        stop(stopDelay, forcedStopDelay);
+        if (!isAutoStopDisabled.value) stop(stopDelay, forcedStopDelay);
         return target.apply(thisArg, argArray);
       },
     });

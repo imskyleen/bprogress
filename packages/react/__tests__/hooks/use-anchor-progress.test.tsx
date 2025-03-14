@@ -12,6 +12,9 @@ jest.mock('../../src/providers/progress-provider', () => ({
   useProgress: () => ({
     start: startMock,
     stop: stopMock,
+    isAutoStopDisabled: jest.fn(() => ({
+      current: false,
+    })),
   }),
 }));
 

@@ -1,5 +1,11 @@
 # @bprogress/next
 
+## 3.2.10
+
+### Patch Changes
+
+- chore: upgrade to `@bprogress/react@1.2.5`
+
 ## 3.2.9
 
 ### Patch Changes

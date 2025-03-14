@@ -33,7 +33,7 @@ export function useAnchorProgress(
   >([]);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const { start, stop } = useProgress();
+  const { start, stop, isAutoStopDisabled } = useProgress();
 
   useEffect(() => {
     if (startOnLoad) start(startPosition, delay);
@@ -43,7 +43,9 @@ export function useAnchorProgress(
 
   useEffect(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => stop(), stopDelay);
+    timerRef.current = setTimeout(() => {
+      if (!isAutoStopDisabled.current) stop();
+    }, stopDelay);
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -147,7 +149,7 @@ export function useAnchorProgress(
     const originalWindowHistoryPushState = window.history.pushState;
     window.history.pushState = new Proxy(window.history.pushState, {
       apply: (target, thisArg, argArray: PushStateInput) => {
-        stop(stopDelay, forcedStopDelay);
+        if (!isAutoStopDisabled.current) stop(stopDelay, forcedStopDelay);
         return target.apply(thisArg, argArray);
       },
     });
@@ -171,5 +173,6 @@ export function useAnchorProgress(
     start,
     stop,
     forcedStopDelay,
+    isAutoStopDisabled,
   ]);
 }

@@ -12,13 +12,27 @@ import { useProgress } from '@bprogress/...';
 ```
 
 <Callout title="Note">
-  Replace the `...` in the import with the library you're using. For example, if you use `@bprogress/next`, import by doing `from '@bprogress/next'`
+  Replace the `...` in the import with the library you're using. For example, if
+  you use `@bprogress/next`, import by doing `from '@bprogress/next'`
 </Callout>
 
 ## Usage
 
 ```tsx
-const { start, stop, inc, dec, set, pause, resume, setOptions, getOptions } = useProgress();
+const {
+  start,
+  stop,
+  inc,
+  dec,
+  set,
+  pause,
+  resume,
+  setOptions,
+  getOptions,
+  isAutoStopDisabled,
+  disableAutoStop,
+  enableAutoStop,
+} = useProgress();
 ```
 
 ## Methods
@@ -30,7 +44,7 @@ Start the progress bar.
 ```tsx
 start();
 // or
-start(0.3, 1000);
+start(0.3, 1000, true);
 ```
 
 ### stop
@@ -101,11 +115,45 @@ Get the progress bar options.
 const options = getOptions();
 ```
 
+### isAutoStopDisabled
+
+Check if the auto stop is disabled.
+
+```tsx
+const isDisabled = isAutoStopDisabled.current;
+```
+
+<Callout title="Note" type="info">
+  When you navigate between pages, the stop is played automatically, so if you
+  don't want the progress to stop by itself when you manipulate the URL, this
+  ref is useful.
+</Callout>
+
+### disableAutoStop
+
+Disable the auto stop.
+
+```tsx
+disableAutoStop();
+```
+
+### enableAutoStop
+
+Enable the auto stop.
+
+```tsx
+enableAutoStop();
+```
+
 ## Types
 
 ```ts
 interface ProgressContextValue {
-  start: (startPosition?: number, delay?: number) => void;
+  start: (
+    startPosition?: number,
+    delay?: number,
+    autoStopDisabled?: boolean,
+  ) => void;
   stop: (stopDelay?: number, forcedStopDelay?: number) => void;
   inc: (amount?: number) => void;
   dec: (amount?: number) => void;
@@ -118,5 +166,8 @@ interface ProgressContextValue {
       | ((prevOptions: BProgressOptions) => Partial<BProgressOptions>),
   ) => void;
   getOptions: () => BProgressOptions;
+  isAutoStopDisabled: React.RefObject<boolean>;
+  disableAutoStop: () => void;
+  enableAutoStop: () => void;
 }
 ```

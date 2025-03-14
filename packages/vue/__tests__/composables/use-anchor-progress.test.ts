@@ -18,6 +18,9 @@ jest.mock('@bprogress/core', () => ({
 // Define start and stop mocks that will be used by the provider
 const startMock = jest.fn();
 const stopMock = jest.fn();
+const isAutoStopDisabledMock = jest.fn(() => ({
+  value: false,
+}));
 
 // Test component that uses the hook
 const TestComponent = defineComponent({
@@ -43,7 +46,11 @@ const TestComponent = defineComponent({
 // Global configuration to provide the ProgressProvider context
 const globalConfig = {
   provide: {
-    [progressSymbol]: { start: startMock, stop: stopMock },
+    [progressSymbol]: {
+      start: startMock,
+      stop: stopMock,
+      isAutoStopDisabled: isAutoStopDisabledMock,
+    },
   },
 };
 

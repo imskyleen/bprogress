@@ -1,5 +1,12 @@
 # @bprogress/vue
 
+## 1.1.4
+
+### Patch Changes
+
+- feat: add auto stop control
+- chore: upgrade to `@bprogress/core@1.3.3`
+
 ## 1.1.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@bprogress/remix",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "NProgress bar like for Remix",
   "type": "module",
   "repository": {
@@ -61,6 +61,6 @@
   },
   "dependencies": {
     "@bprogress/core": "^1.3.3",
-    "@bprogress/react": "^1.2.4"
+    "@bprogress/react": "^1.2.5"
   }
 }
