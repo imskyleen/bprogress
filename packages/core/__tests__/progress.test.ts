@@ -604,4 +604,52 @@ describe('BProgress', () => {
       expect(progress2.style.display).not.toBe('none');
     });
   });
+
+  describe('trickleTimer management', () => {
+    beforeEach(() => {
+      jest.useFakeTimers();
+      BProgress.reset();
+    });
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    test('should clear trickleTimer on done', () => {
+      BProgress.start();
+      // Simulate trickleTimer being set
+      // @ts-expect-error: access private for test
+      BProgress.trickleTimer = setTimeout(() => {}, 1000);
+      BProgress.done();
+      // @ts-expect-error: access private for test
+      expect(BProgress.trickleTimer).toBeNull();
+    });
+
+    test('should clear trickleTimer on reset', () => {
+      BProgress.start();
+      // @ts-expect-error: access private for test
+      BProgress.trickleTimer = setTimeout(() => {}, 1000);
+      BProgress.reset();
+      // @ts-expect-error: access private for test
+      expect(BProgress.trickleTimer).toBeNull();
+    });
+
+    test('should clear trickleTimer on pause', () => {
+      BProgress.start();
+      // @ts-expect-error: access private for test
+      BProgress.trickleTimer = setTimeout(() => {}, 1000);
+      BProgress.pause();
+      // @ts-expect-error: access private for test
+      expect(BProgress.trickleTimer).toBeNull();
+    });
+
+    test('should restart trickleTimer on resume', () => {
+      BProgress.start();
+      BProgress.pause();
+      // @ts-expect-error: access private for test
+      expect(BProgress.trickleTimer).toBeNull();
+      BProgress.resume();
+      // @ts-expect-error: access private for test
+      expect(BProgress.trickleTimer).not.toBeNull();
+    });
+  });
 });

@@ -36,6 +36,7 @@ export class BProgress {
   // Queue for animation functions
   private static pending: Array<(next: () => void) => void> = [];
   private static isPaused: boolean = false;
+  private static trickleTimer: ReturnType<typeof setTimeout> | null = null;
 
   // Reset the progress
   static reset(): typeof BProgress {
@@ -43,6 +44,10 @@ export class BProgress {
     this.isPaused = false;
     this.pending = [];
     this.settings = defaultSettings;
+    if (this.trickleTimer) {
+      clearTimeout(this.trickleTimer);
+      this.trickleTimer = null;
+    }
     return this;
   }
 
@@ -132,20 +137,24 @@ export class BProgress {
 
     const work = () => {
       if (this.isPaused) return;
-      setTimeout(() => {
+      this.trickleTimer = setTimeout(() => {
         if (!this.status) return;
         this.trickle();
         work();
       }, this.settings.trickleSpeed);
     };
 
-    if (this.settings.trickle) work();
+    if (this.settings.trickle && !this.trickleTimer) work();
 
     return this;
   }
 
   // Complete the progress
   static done(force?: boolean): typeof BProgress {
+    if (this.trickleTimer) {
+      clearTimeout(this.trickleTimer);
+      this.trickleTimer = null;
+    }
     if (!force && !this.status) return this;
     return this.inc(0.3 + 0.5 * Math.random()).set(1);
   }
@@ -384,6 +393,10 @@ export class BProgress {
   static pause(): typeof BProgress {
     if (!this.isStarted() || this.settings.indeterminate) return this;
     this.isPaused = true;
+    if (this.trickleTimer) {
+      clearTimeout(this.trickleTimer);
+      this.trickleTimer = null;
+    }
     return this;
   }
 
@@ -396,11 +409,10 @@ export class BProgress {
     this.isPaused = false;
 
     // If trickle is enabled, restart the trickle loop only once
-    if (this.settings.trickle) {
-      // Avoid starting multiple loops by checking if one is already running could be implemented here.
+    if (this.settings.trickle && !this.trickleTimer) {
       const work = () => {
         if (this.isPaused) return;
-        setTimeout(() => {
+        this.trickleTimer = setTimeout(() => {
           // Ensure that progress is still active before trickling
           if (!this.status) return;
           this.trickle();
