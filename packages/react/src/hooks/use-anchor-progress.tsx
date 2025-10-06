@@ -25,6 +25,7 @@ export function useAnchorProgress(
     disableAnchorClick = false,
     startOnLoad = false,
     forcedStopDelay = 0,
+    attachOnMount = false,
   }: UseAnchorProgressOptions,
   deps: unknown[] = [],
 ) {
@@ -113,7 +114,7 @@ export function useAnchorProgress(
       start(startPosition, delay);
     };
 
-    const handleMutation: MutationCallback = () => {
+    const handleMutation = () => {
       const anchorElements = Array.from(document.querySelectorAll('a')) as (
         | HTMLAnchorElement
         | SVGAElement
@@ -143,6 +144,7 @@ export function useAnchorProgress(
       elementsWithAttachedHandlers.current = validAnchorElements;
     };
 
+    if (attachOnMount) handleMutation();
     const mutationObserver = new MutationObserver(handleMutation);
     mutationObserver.observe(document, { childList: true, subtree: true });
 
