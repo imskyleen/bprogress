@@ -126,4 +126,5 @@ export type UseAnchorProgressOptions = Omit<
   'memo' | 'shouldCompareComplexProps'
 > & {
   forcedStopDelay?: number;
+  attachOnMount?: boolean;
 };
