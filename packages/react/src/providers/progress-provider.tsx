@@ -3,6 +3,7 @@ import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
 } from 'react';
@@ -114,7 +115,9 @@ export const ProgressProvider = ({
     [color, height, nonce, spinnerPosition, style],
   );
 
-  BProgress.configure(options || {});
+  useEffect(() => {
+    BProgress.configure(options || {});
+  }, [options]);
 
   return (
     <ProgressContext.Provider
