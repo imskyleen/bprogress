@@ -5,7 +5,7 @@ description: Get started with BProgress for TanStack Router
 
 ## Import
 
-Import the `ProgressProvider` in your root route or main entry file.
+Import `ProgressProvider` in your root route file.
 
 ```tsx
 import { ProgressProvider } from '@bprogress/tanstack-router';
@@ -13,20 +13,26 @@ import { ProgressProvider } from '@bprogress/tanstack-router';
 
 ## Usage
 
-Wrap your application with the `ProgressProvider` component:
+`ProgressProvider` must be **inside** the router (as part of your root route component). Wrap your root route content (e.g. `<Outlet />`) with it—do not wrap `<RouterProvider>`.
 
 ```tsx
+// ✅ Correct: ProgressProvider inside the router tree
 <ProgressProvider>
-  <RouterProvider router={router} />
+  <Outlet />
 </ProgressProvider>
 ```
 
-## Example: TanStack Router (SPA)
+## Example
+
+### TanStack Router (SPA)
+
+Put `ProgressProvider` in your root route component so it runs inside `RouterProvider`:
 
 ```tsx title="src/main.tsx"
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import {
+  Outlet,
   RouterProvider,
   createRootRoute,
   createRouter,
@@ -41,7 +47,7 @@ const rootRoute = createRootRoute({
   ),
 })
 
-// ... define your routes
+// ... add child routes to routeTree
 
 const router = createRouter({ routeTree })
 
@@ -52,33 +58,39 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 )
 ```
 
-## Example: TanStack Start (SSR)
+### TanStack Start (SSR)
 
-```tsx title="app/routes/__root.tsx"
-import { createRootRoute, Outlet } from '@tanstack/react-router'
+In TanStack Start, the root route is `routes/__root.tsx`. Wrap your body content with `ProgressProvider` there (you're already under the router).
+
+```tsx title="routes/__root.tsx"
+import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { ProgressProvider } from '@bprogress/tanstack-router'
 
 export const Route = createRootRoute({
+  head: () => ({ meta: [...], links: [...] }),
   component: RootComponent,
 })
 
-function RootComponent() {
+function RootComponent({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>My App</title>
+        <HeadContent />
       </head>
       <body>
         <ProgressProvider>
-          <Outlet />
+          {children}
         </ProgressProvider>
+        <Scripts />
       </body>
     </html>
   )
 }
 ```
+
+<Callout type="info" title="SSR Support">
+  The provider uses `<ClientOnly>` from `@tanstack/react-router` internally in SSR, so the same usage works in both SPA and TanStack Start.
+</Callout>
 
 ## How It Works
 

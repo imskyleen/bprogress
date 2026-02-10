@@ -5,7 +5,7 @@ description: The main provider component for TanStack Router progress bar
 
 ## Overview
 
-`ProgressProvider` is the root component that enables automatic progress bars for all navigation events in your TanStack Router application.
+`ProgressProvider` enables automatic progress bars for all navigation events. It must be used **inside** the router (e.g. in your root route component), not wrapping `<RouterProvider>`.
 
 ## Import
 
@@ -15,9 +15,24 @@ import { ProgressProvider } from '@bprogress/tanstack-router';
 
 ## Usage
 
+Wrap your root route content (e.g. `<Outlet />` or `{children}`) with `ProgressProvider`. It uses `useRouter()` internally, so it must be a descendant of `RouterProvider`.
+
+### TanStack Router (SPA)
+
+```tsx
+// In your root route component
+<ProgressProvider>
+  <Outlet />
+</ProgressProvider>
+```
+
+### TanStack Start (SSR)
+
+In `routes/__root.tsx`, wrap the body content. The provider handles SSR via `<ClientOnly>` internally.
+
 ```tsx
 <ProgressProvider>
-  <RouterProvider router={router} />
+  {children}
 </ProgressProvider>
 ```
 
@@ -34,22 +49,19 @@ All props from [@bprogress/react ProgressProvider](/docs/react/components/progre
 
 ## Examples
 
-### Basic Usage
+### Basic
 
 ```tsx
 <ProgressProvider>
-  <RouterProvider router={router} />
+  <Outlet />
 </ProgressProvider>
 ```
 
 ### Custom Color and Height
 
 ```tsx
-<ProgressProvider
-  color="#ff0000"
-  height="4px"
->
-  <RouterProvider router={router} />
+<ProgressProvider color="#ff0000" height="4px">
+  <Outlet />
 </ProgressProvider>
 ```
 
@@ -58,21 +70,16 @@ All props from [@bprogress/react ProgressProvider](/docs/react/components/progre
 Useful to prevent flickering on fast navigations:
 
 ```tsx
-<ProgressProvider
-  delay={100}
-  stopDelay={200}
->
-  <RouterProvider router={router} />
+<ProgressProvider delay={100} stopDelay={200}>
+  <Outlet />
 </ProgressProvider>
 ```
 
 ### Allow Same URL Navigation
 
 ```tsx
-<ProgressProvider
-  disableSameURL={false}
->
-  <RouterProvider router={router} />
+<ProgressProvider disableSameURL={false}>
+  <Outlet />
 </ProgressProvider>
 ```
 
@@ -87,7 +94,7 @@ Useful to prevent flickering on fast navigations:
     showSpinner: true,
   }}
 >
-  <RouterProvider router={router} />
+  <Outlet />
 </ProgressProvider>
 ```
 
