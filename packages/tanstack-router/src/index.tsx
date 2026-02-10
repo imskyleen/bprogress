@@ -8,7 +8,6 @@ export {
   SpinnerIcon,
   Indeterminate,
 } from '@bprogress/react';
-export * from './hooks/use-navigate';
 export type {
   SpinnerPosition,
   ProgressContextValue,
