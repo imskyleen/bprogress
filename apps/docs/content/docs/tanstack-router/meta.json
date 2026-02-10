@@ -1,0 +1,14 @@
+{
+  "title": "TanStack Router",
+  "root": false,
+  "pages": [
+    "---Guide---",
+    "installation",
+    "quick-start",
+    "---Components---",
+    "components/progress-provider",
+    "../react/components/progress-components",
+    "---Hooks---",
+    "../react/hooks/use-progress"
+  ]
+}

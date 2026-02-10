@@ -1,0 +1,97 @@
+---
+title: ProgressProvider
+description: The main provider component for TanStack Router progress bar
+---
+
+## Overview
+
+`ProgressProvider` is the root component that enables automatic progress bars for all navigation events in your TanStack Router application.
+
+## Import
+
+```tsx
+import { ProgressProvider } from '@bprogress/tanstack-router';
+```
+
+## Usage
+
+```tsx
+<ProgressProvider>
+  <RouterProvider router={router} />
+</ProgressProvider>
+```
+
+## Props
+
+All props from [@bprogress/react ProgressProvider](/docs/react/components/progress-provider) are supported, plus:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `startPosition` | `number` | `0` | Starting position of the progress bar (0-1) |
+| `delay` | `number` | `0` | Delay in ms before showing the progress bar |
+| `stopDelay` | `number` | `0` | Delay in ms before hiding the progress bar |
+| `disableSameURL` | `boolean` | `true` | Disable progress bar when navigating to the same URL |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<ProgressProvider>
+  <RouterProvider router={router} />
+</ProgressProvider>
+```
+
+### Custom Color and Height
+
+```tsx
+<ProgressProvider
+  color="#ff0000"
+  height="4px"
+>
+  <RouterProvider router={router} />
+</ProgressProvider>
+```
+
+### With Delay
+
+Useful to prevent flickering on fast navigations:
+
+```tsx
+<ProgressProvider
+  delay={100}
+  stopDelay={200}
+>
+  <RouterProvider router={router} />
+</ProgressProvider>
+```
+
+### Allow Same URL Navigation
+
+```tsx
+<ProgressProvider
+  disableSameURL={false}
+>
+  <RouterProvider router={router} />
+</ProgressProvider>
+```
+
+### Custom Options
+
+```tsx
+<ProgressProvider
+  options={{
+    minimum: 0.1,
+    trickle: true,
+    trickleSpeed: 200,
+    showSpinner: true,
+  }}
+>
+  <RouterProvider router={router} />
+</ProgressProvider>
+```
+
+## Related
+
+- [Progress Components](/docs/react/components/progress-components) - Customize the progress bar appearance
+- [useProgress Hook](/docs/react/hooks/use-progress) - Manual progress control
