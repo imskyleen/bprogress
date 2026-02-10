@@ -12,13 +12,14 @@ It helps users understand that a new page or content is being loaded, making nav
 
 ## Packages
 
-| Package     | Lien                                                               | Changelog                                                                                 |
-| ----------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| **Core**    | [@bprogress/core](https://www.npmjs.com/package/@bprogress/core)   | [CHANGELOG](https://github.com/imskyleen/bprogress/tree/main/packages/core/CHANGELOG.md)  |
-| **React**   | [@bprogress/react](https://www.npmjs.com/package/@bprogress/react) | [CHANGELOG](https://github.com/imskyleen/bprogress/tree/main/packages/react/CHANGELOG.md) |
-| **Next.js** | [@bprogress/next](https://www.npmjs.com/package/@bprogress/next)   | [CHANGELOG](https://github.com/imskyleen/bprogress/tree/main/packages/next/CHANGELOG.md)  |
-| **Remix**   | [@bprogress/remix](https://www.npmjs.com/package/@bprogress/remix) | [CHANGELOG](https://github.com/imskyleen/bprogress/tree/main/packages/remix/CHANGELOG.md) |
-| **Vue**     | [@bprogress/vue](https://www.npmjs.com/package/@bprogress/vue)     | [CHANGELOG](https://github.com/imskyleen/bprogress/tree/main/packages/vue/CHANGELOG.md)   |
+| Package              | Lien                                                                                 | Changelog                                                                                                  |
+| -------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| **Core**             | [@bprogress/core](https://www.npmjs.com/package/@bprogress/core)                     | [CHANGELOG](https://github.com/imskyleen/bprogress/tree/main/packages/core/CHANGELOG.md)                   |
+| **React**            | [@bprogress/react](https://www.npmjs.com/package/@bprogress/react)                   | [CHANGELOG](https://github.com/imskyleen/bprogress/tree/main/packages/react/CHANGELOG.md)                  |
+| **Next.js**          | [@bprogress/next](https://www.npmjs.com/package/@bprogress/next)                     | [CHANGELOG](https://github.com/imskyleen/bprogress/tree/main/packages/next/CHANGELOG.md)                   |
+| **Remix**            | [@bprogress/remix](https://www.npmjs.com/package/@bprogress/remix)                   | [CHANGELOG](https://github.com/imskyleen/bprogress/tree/main/packages/remix/CHANGELOG.md)                  |
+| **TanStack Router**  | [@bprogress/tanstack-router](https://www.npmjs.com/package/@bprogress/tanstack-router) | [CHANGELOG](https://github.com/imskyleen/bprogress/tree/main/packages/tanstack-router/CHANGELOG.md)        |
+| **Vue**              | [@bprogress/vue](https://www.npmjs.com/package/@bprogress/vue)                       | [CHANGELOG](https://github.com/imskyleen/bprogress/tree/main/packages/vue/CHANGELOG.md)                    |
 
 ## Documentation
 
