@@ -1,4 +1,5 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { ProgressProvider } from '@bprogress/tanstack-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
@@ -39,7 +40,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <Header />
-        {children}
+        <ProgressProvider
+          height="4px"
+          color="#0A2FFF"
+          options={{ showSpinner: false }}
+          shallowRouting
+        >
+          {children}
+        </ProgressProvider>
         <TanStackDevtools
           config={{
             position: 'bottom-right',

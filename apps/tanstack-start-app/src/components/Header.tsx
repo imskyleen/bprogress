@@ -11,6 +11,10 @@ export default function Header() {
         </div>
 
         <div className="px-2 font-bold">
+          <Link to="/demo/bprogress">BProgress Demo</Link>
+        </div>
+
+        <div className="px-2 font-bold">
           <Link to="/demo/start/server-funcs">Start - Server Functions</Link>
         </div>
 
