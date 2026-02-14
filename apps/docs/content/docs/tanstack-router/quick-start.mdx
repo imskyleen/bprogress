@@ -1,0 +1,75 @@
+---
+title: Quick Start
+description: Get started with BProgress for TanStack Router
+---
+
+## Import
+
+```tsx
+import { ProgressProvider } from '@bprogress/tanstack-router';
+```
+
+## Usage
+
+`<ProgressProvider>` must be **inside** `<RouterProvider>`.
+
+```tsx
+<ProgressProvider>
+  ...
+</ProgressProvider>
+```
+
+## Example
+
+In both setups, `__root.tsx` is rendered as a child of `<RouterProvider>`.
+
+### TanStack Router (SPA)
+
+```tsx title="src/routes/__root.tsx"
+import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { ProgressProvider } from '@bprogress/tanstack-router'
+
+export const Route = createRootRoute({
+  component: RootComponent,
+});
+
+function RootComponent() {
+  return (
+    <ProgressProvider>
+      <Outlet />
+    </ProgressProvider>
+  );
+}
+```
+
+### TanStack Start (SSR)
+
+```tsx title="src/routes/__root.tsx"
+import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { ProgressProvider } from '@bprogress/tanstack-router'
+
+export const Route = createRootRoute({
+  head: () => ({ meta: [...], links: [...] }),
+  component: RootComponent,
+})
+
+function RootComponent({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        <ProgressProvider>
+          {children}
+        </ProgressProvider>
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+```
+
+<Callout type="info" title="SSR Support">
+  The provider uses `<ClientOnly>` from `@tanstack/react-router` internally in SSR, so the same usage works in both SPA and TanStack Start.
+</Callout>

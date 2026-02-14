@@ -1,0 +1,68 @@
+{
+  "name": "@bprogress/tanstack-router",
+  "version": "1.0.0",
+  "description": "NProgress bar like for TanStack Router",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imskyleen/bprogress/tree/main/packages/tanstack-router"
+  },
+  "bugs": {
+    "url": "https://github.com/imskyleen/bprogress/issues"
+  },
+  "homepage": "https://bprogress.vercel.app/docs/tanstack-router/installation",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "pub:release": "pnpm publish --no-git-checks --access public",
+    "pub:canary": "pnpm publish --no-git-checks --tag canary --access public",
+    "pub:beta": "pnpm publish --no-git-checks --tag beta --access public",
+    "prepublishOnly": "pnpm lint && pnpm build"
+  },
+  "keywords": [
+    "tanstack",
+    "tanstack router",
+    "tanstack start",
+    "tanstack router nprogress",
+    "tanstack router bprogress",
+    "tanstack router progress",
+    "react",
+    "nprogress",
+    "bprogress",
+    "progress bar",
+    "progress bar tanstack router"
+  ],
+  "author": "Skyleen",
+  "license": "MIT",
+  "devDependencies": {
+    "@swc/core": "^1.10.16",
+    "@types/node": "^22.12.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
+    "eslint": "^9.19.0",
+    "eslint-config-next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "@tanstack/react-router": "^1.95.4"
+  },
+  "peerDependencies": {
+    "@tanstack/react-router": ">=1.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "@bprogress/core": "^1.3.4",
+    "@bprogress/react": "^1.2.7"
+  }
+}
