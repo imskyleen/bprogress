@@ -5,64 +5,46 @@ description: Get started with BProgress for TanStack Router
 
 ## Import
 
-Import `ProgressProvider` in your root route file.
-
 ```tsx
 import { ProgressProvider } from '@bprogress/tanstack-router';
 ```
 
 ## Usage
 
-`ProgressProvider` must be **inside** the router (as part of your root route component). Wrap your root route content (e.g. `<Outlet />`) with it—do not wrap `<RouterProvider>`.
+`<ProgressProvider>` must be **inside** `<RouterProvider>`.
 
 ```tsx
-// ✅ Correct: ProgressProvider inside the router tree
 <ProgressProvider>
-  <Outlet />
+  ...
 </ProgressProvider>
 ```
 
 ## Example
 
+In both setups, `__root.tsx` is rendered as a child of `<RouterProvider>`.
+
 ### TanStack Router (SPA)
 
-Put `ProgressProvider` in your root route component so it runs inside `RouterProvider`:
-
-```tsx title="src/main.tsx"
-import { StrictMode } from 'react'
-import ReactDOM from 'react-dom/client'
-import {
-  Outlet,
-  RouterProvider,
-  createRootRoute,
-  createRouter,
-} from '@tanstack/react-router'
+```tsx title="src/routes/__root.tsx"
+import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { ProgressProvider } from '@bprogress/tanstack-router'
 
-const rootRoute = createRootRoute({
-  component: () => (
+export const Route = createRootRoute({
+  component: RootComponent,
+});
+
+function RootComponent() {
+  return (
     <ProgressProvider>
       <Outlet />
     </ProgressProvider>
-  ),
-})
-
-// ... add child routes to routeTree
-
-const router = createRouter({ routeTree })
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
-)
+  );
+}
 ```
 
 ### TanStack Start (SSR)
 
-In TanStack Start, the root route is `routes/__root.tsx`. Wrap your body content with `ProgressProvider` there (you're already under the router).
-
-```tsx title="routes/__root.tsx"
+```tsx title="src/routes/__root.tsx"
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { ProgressProvider } from '@bprogress/tanstack-router'
 
@@ -91,39 +73,3 @@ function RootComponent({ children }: { children: React.ReactNode }) {
 <Callout type="info" title="SSR Support">
   The provider uses `<ClientOnly>` from `@tanstack/react-router` internally in SSR, so the same usage works in both SPA and TanStack Start.
 </Callout>
-
-## How It Works
-
-The progress bar automatically appears during navigation:
-
-- **Link clicks**: Progress starts when clicking `<Link>` components
-- **Programmatic navigation**: Progress appears for `navigate()` calls
-- **All routing events**: The provider listens to TanStack Router's `onBeforeLoad` and `onResolved` events
-
-<Callout type="info" title="Simple & Automatic">
-  No configuration needed! The progress bar works automatically for all navigation in your app.
-</Callout>
-
-## Manual Control
-
-For advanced use cases, you can manually control the progress bar:
-
-```tsx
-import { useProgress } from '@bprogress/tanstack-router'
-
-function MyComponent() {
-  const { start, stop, pause, resume } = useProgress()
-
-  return (
-    <button onClick={() => {
-      start()
-      // ... perform some action
-      stop()
-    }}>
-      Custom Action
-    </button>
-  )
-}
-```
-
-See the [useProgress hook](/docs/react/hooks/use-progress) documentation for more details.
