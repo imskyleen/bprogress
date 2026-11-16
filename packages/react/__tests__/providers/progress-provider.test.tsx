@@ -139,6 +139,37 @@ describe('ProgressProvider', () => {
     jest.useRealTimers();
   });
 
+  it('does not start after stop when start is called twice within the delay', () => {
+    const DoubleStart = () => {
+      const { start, stop } = useProgress();
+      return (
+        <div>
+          <button onClick={() => start(0, 100)}>Start</button>
+          <button onClick={() => stop()}>Stop</button>
+        </div>
+      );
+    };
+
+    const { getByText } = render(
+      <ProgressProvider>
+        <DoubleStart />
+      </ProgressProvider>,
+    );
+
+    act(() => {
+      getByText('Start').click();
+      getByText('Start').click();
+      jest.advanceTimersByTime(50);
+      getByText('Stop').click();
+    });
+
+    act(() => {
+      jest.advanceTimersByTime(200);
+    });
+
+    expect(BProgress.start).not.toHaveBeenCalled();
+  });
+
   it('calls BProgress.inc when inc is invoked', () => {
     const { getByText } = render(
       <ProgressProvider>

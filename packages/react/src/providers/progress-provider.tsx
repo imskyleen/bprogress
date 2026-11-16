@@ -49,6 +49,8 @@ export const ProgressProvider = ({
   const start = useCallback(
     (startPosition = 0, delay = 0, autoStopDisabled = false) => {
       if (autoStopDisabled) disableAutoStop();
+      // stop() can only clear the timer it can see, so don't leave an older one pending
+      if (timer.current) clearTimeout(timer.current);
       timer.current = setTimeout(() => {
         if (startPosition > 0) BProgress.set(startPosition);
         BProgress.start();
