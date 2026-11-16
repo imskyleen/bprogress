@@ -47,6 +47,8 @@ const start = (
   autoStopDisabled: boolean = false,
 ) => {
   if (autoStopDisabled) disableAutoStop();
+  // stop() can only clear the timer it can see, so don't leave an older one pending
+  if (timer.value) clearTimeout(timer.value);
   timer.value = setTimeout(() => {
     if (startPosition > 0) BProgress.set(startPosition);
     BProgress.start();

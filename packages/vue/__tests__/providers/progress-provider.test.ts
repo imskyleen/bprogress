@@ -124,6 +124,32 @@ describe('ProgressProvider.vue', () => {
     expect(BProgress.done).toHaveBeenCalled();
   });
 
+  test('does not start after stop when start is called twice within the delay', async () => {
+    const DoubleStart = defineComponent({
+      template: `
+        <div>
+          <button data-testid="start" @click="start(0, 100)">Start</button>
+          <button data-testid="stop" @click="stop()">Stop</button>
+        </div>
+      `,
+      setup() {
+        const { start, stop } = useProgress();
+        return { start, stop };
+      },
+    });
+
+    const { getByTestId } = render(ProgressProvider, {
+      slots: { default: DoubleStart },
+    });
+
+    await fireEvent.click(getByTestId('start'));
+    await fireEvent.click(getByTestId('start'));
+    jest.advanceTimersByTime(50);
+    await fireEvent.click(getByTestId('stop'));
+    jest.advanceTimersByTime(200);
+    expect(BProgress.start).not.toHaveBeenCalled();
+  });
+
   test('calls BProgress.inc when inc is invoked', async () => {
     const { getByTestId } = render(ProgressProvider, {
       slots: { default: TestComponent },
